@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
 	lastName: {type: String, required: true},
 	email: {type: String, required: true, unique: true},
 	password: {type: String, required: true},
-    flashcardsIDs: [{
+    flashcardIDs: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Flashcard",
         required: false,

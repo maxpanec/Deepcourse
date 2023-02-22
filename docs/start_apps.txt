@@ -1,7 +1,0 @@
-#cd dev
-#cd backend (to run backend)
-#cd frontend/react_app (to run frontend)
-
-npm ci <-- only updates from the package-lock.json <br/>
-node src <-- start the backend
-npm start <-- start the frontend
