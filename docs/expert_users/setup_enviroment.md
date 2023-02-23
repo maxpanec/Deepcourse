@@ -1,8 +1,8 @@
 # How to setup the enviroment for and run React and Node apps
 
 ## Precondition
-install Node.js  
-https://nodejs.org/en/download/  
+install Node.js at https://nodejs.org/en/download/  
+download or clone our github at https://github.com/maxpanec/Deepcourse  
 
 ## Update/Install packages
 open terminal and navigate to root of project (/Deepcourse)  
