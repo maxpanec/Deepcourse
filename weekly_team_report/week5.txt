@@ -1,0 +1,38 @@
+Report for week 5
+
+Team Name: Team Deepcourse
+
+Members: Maxwell Panec, Justin Barragan, Peizu Li, Hung Nguyen
+
+Current Team Lead: Hung Nguyen
+
+Project Title: Study Sets
+
+Job Assignment:
+
+backend - Maxwell Panec
+
+frontend - Justin Barragan, Peizu Li, Hung Nguyen
+
+Milestones With Deadlines / Tasks for Each Individual (includes accomplished & future tasks):
+
+Create React/Express apps and finalize features for the project (2/8)
+Create UI mockups and design/host the database (2/23)
+Implement creating accounts and homepage (3/9)
+Implement creating/viewing flashcards (3/23)
+Implement creating/taking quizzes (4/6)
+Implement quiz progression timeline (4/13)
+Comprehensive Testing (4/27)
+Technology Tools Used: React, Node, Express, MongoDB
+
+List the milestones that have been accomplished as a team.
+
+Milestone 1 & 2 are accomplished.
+
+UI mockups and design/host the database are completed
+
+The next task to do (or current task to be continued).
+
+Implement creating accounts and homepage (3/9). The weekly group meetings are scheduled every Tuesday and Thursday on discord.
+
+Github: https://github.com/maxpanec/Deepcourse
