@@ -1,10 +1,16 @@
 const express = require('express');
 const mongoose = require("mongoose");
+const cors = require("cors");
 mongoose.set('strictQuery', false);
-  
+
+const accountRoutes = require('./routes/accounts')
+
+
 const app = express();
 
 app.use(express.json());
+app.use(cors());
+app.use("/accounts", accountRoutes)
 
 try{
 	mongoose.connect(
@@ -17,7 +23,7 @@ try{
 	console.log("Failed to Connect to Database!")
 }
 
-const PORT = 3002;
+const PORT = 3001;
   
 app.listen(PORT, (error) =>{
     if(!error)
