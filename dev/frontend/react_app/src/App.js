@@ -4,6 +4,7 @@ import './App.css';
 import Homepage from './Components/Homepage/Homepage';
 import Navbar from './Components/Navbar/Navbar';
 import Signin from './Components/Signin/Signin';
+import Signup from './Components/Signup/Signup';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 			<Routes>
 				<Route path="/" exact element={<Homepage/>}/>
 				<Route path="/signin" exact element={<Signin/>}/>
+				<Route path="/signup" exact element={<Signup/>}/>
 			</Routes>
 		</BrowserRouter>
 	);
