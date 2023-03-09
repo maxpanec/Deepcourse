@@ -18,10 +18,6 @@ const About = () => {
                         <li>Hung Nguyen</li>
                     </ul>
                 </div>
-                
-            </div>
-            <div>
-                
             </div>
         </b>
     );
