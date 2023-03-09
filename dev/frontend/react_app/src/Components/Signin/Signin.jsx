@@ -43,7 +43,7 @@ const Signin = () => {
 
 	return (
         <div className="signin_container">
-            <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em"}}>Login to Account</h1>
+            <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em", cursor: "default"}}>Login to Account</h1>
             <form onSubmit={handleSubmit}>
                 <ThemeProvider theme={darkTheme}>
                     <div className='signin_field_container'>
@@ -73,7 +73,7 @@ const Signin = () => {
                 {error && <div className="error_msg">{error}</div>}
                 <Button type='submit' variant="contained" color="primary" fullWidth>Sign In</Button>
             </form>
-            <h3 style={{marginTop: "2em"}}>Don't have an account?</h3>
+            <h3 style={{marginTop: "2em", cursor: "default"}}>Don't have an account?</h3>
             <Button
                 variant="outlined"
                 color="primary"

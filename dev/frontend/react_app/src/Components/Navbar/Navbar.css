@@ -30,3 +30,7 @@
     font-size: large;
     font-weight: 600;
 }
+
+.navbar_item:hover{
+    color: orange;
+}

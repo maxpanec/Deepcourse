@@ -1,0 +1,20 @@
+.OuterDiv{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.innerDiv{
+    margin-top: 50px;
+}
+
+.names{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+li{
+    padding: 3px;
+}
