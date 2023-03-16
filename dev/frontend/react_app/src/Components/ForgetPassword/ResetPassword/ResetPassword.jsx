@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./ResetPassword.css"
@@ -76,6 +76,16 @@ const ResetPassword = () => {
                 {error && <div className="error_msg">{error}</div>}
                 <Button type='submit' variant="contained" color="primary" fullWidth>Reset Password</Button>
             </form>
+            <div className="back" >
+                <Button
+                    variant="contained" 
+                    color="primary" 
+                    fullWidth
+                    component={Link}
+                    to="/signin">
+                    Back
+                </Button>
+            </div>
         </div>
     );
 }
