@@ -43,7 +43,7 @@ const Signin = () => {
 
 	return (
         <div className="signin_container">
-            <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em", cursor: "default"}}>Login to Account</h1>
+            <h1 className="header" >Login to Account</h1>
             <form onSubmit={handleSubmit}>
                 <ThemeProvider theme={darkTheme}>
                     <div className='signin_field_container'>
@@ -57,7 +57,9 @@ const Signin = () => {
                             onChange={handleChange}
                             autoFocus
                         />
+                        <Link to='/forget-username' className='forgets'>Forget Username?</Link>
                     </div>
+                    
                     <div className='signin_field_container'>
                         <TextField
                             name="password"
@@ -68,20 +70,23 @@ const Signin = () => {
                             fullWidth
                             onChange={handleChange}
                         />
+                        <Link to='/forget-password' className='forgets'>Forget Password?</Link>
                     </div>
                 </ThemeProvider>
                 {error && <div className="error_msg">{error}</div>}
                 <Button type='submit' variant="contained" color="primary" fullWidth>Sign In</Button>
             </form>
-            <h3 style={{marginTop: "2em", cursor: "default"}}>Don't have an account?</h3>
-            <Button
-                variant="outlined"
-                color="primary"
-                size="small"
-                component={Link}
-                to='/signup'>
-                Sign Up
-            </Button>
+            <h3 className='question' style={{}}>Don't have an account?</h3>
+            <div className='signup'>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    component={Link}
+                    to='/signup'>
+                    Sign Up
+                </Button>
+            </div>
         </div>
 	);
 };

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {User, validate} = require("../models/User")
 const Joi = require('joi');
 const bcrypt = require("bcrypt")
+const passwordComplexity = require("joi-password-complexity")
 
 router.post("/signin", async(req,res) => {
     try {
@@ -20,6 +21,48 @@ router.post("/signin", async(req,res) => {
 
     } catch (error) {
         res.status(500).json({message: "Internal Server Error!!!"})
+    }
+})
+
+router.post("/forget-password", async (req, res) => {
+    try{
+        const email = await User.findOne({email: req.body.email})
+        if (!email)
+            return res.status(401).json({message: "Invalid Email!"})
+
+        if((req.body.username).localeCompare(email.username))
+            return res.status(401).json({message: "Invalid Username!"})
+
+        return res.status(201).json({message: "Found Valid Username!"})
+    } catch (error) {
+        res.status(500).json({message: "Internnal Server Error!!!"})
+    }
+})
+
+router.post("/forget-password/reset-password", async (req, res) => {
+    try{
+        let password = req.body.password
+        let confirmed = req.body.confirmed_password
+
+        const user = await User.findOne({email: req.body.email})
+        if(!user)
+            return res.status(401).json({message: "Oops. Something went wrong!"})
+
+        if(password.localeCompare(confirmed))
+            return res.status(402).json({message: "Password does not match!"})
+
+        await user.remove();
+
+        const salt = await bcrypt.genSalt(Number(10))
+        const hashPassword = await bcrypt.hash(req.body.password, salt)
+        let newUser = await new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: hashPassword
+        }).save()
+        return res.status(201).json({data: newUser, message: "Password Successfully Reset!"})
+    } catch (error) {
+        res.status(500).json({message: "Internnal Server Error!!!"})
     }
 })
 
