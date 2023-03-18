@@ -7,12 +7,16 @@ import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 import About from './Components/About/About'
 import Footer from './Components/Footer/Footer';
-
+import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
+import ResetPassword from './Components/ForgetPassword/ResetPassword/ResetPassword';
+import ForgetUsername from './Components/ForgetUsername/ForgetUsername';
+import ResetUsername from './Components/ForgetUsername/ResetUsername/ResetUsername';
+import Error from './Components/Error/Error';
 
 function App() {
 	const data = localStorage.getItem('data');
 	const user = useMemo(() => {
-		return JSON.parse(data);
+		return JSON.parse(JSON.stringify(data));
 	},[data])
 
 	return (
@@ -26,6 +30,11 @@ function App() {
 							<Route path="/signup" exact element={<Signup/>}/>
 							<Route path="/about" exact element={<About/>}/>
 							{/*<Route path="/contact" exact element={<Contact/>}/>*/}
+							<Route path="/forget-password" exact element={<ForgetPassword/>}/>
+							<Route path="/forget-password/reset" exact element={<ResetPassword/>}/>
+							<Route path="/forget-username" exact element={<ForgetUsername/>}/>
+							<Route path="forget-username/reset" exact element={<ResetUsername/>}/>
+							<Route path="*" element={<Error/>}/>
 						</Routes>
 					</div>
 				<Footer/>

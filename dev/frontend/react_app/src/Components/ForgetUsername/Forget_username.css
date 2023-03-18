@@ -1,4 +1,4 @@
-.signin_container{
+.forget_username_container {
     color: white;
     background-color: #14181d;
     max-width: 20em;
@@ -19,7 +19,7 @@
     text-align: center;
 }
 
-.signin_field_container{
+.forget-field-container{
     margin-bottom: 1.5em;
 }
 
@@ -30,25 +30,6 @@
 	font-size: 14px;
 }
 
-.forgets {
-    color: white;
-    font-size: small;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.forgets:hover {
-    text-decoration: underline;
-    color: lightblue;
-}
-
-.question {
-    margin-top: 2em; 
-    cursor: default;
-    text-align: center;
-}
-
-.signup {
-    display: flex;
-    justify-content: center;
+.back {
+    padding-top: 1.5em;
 }
