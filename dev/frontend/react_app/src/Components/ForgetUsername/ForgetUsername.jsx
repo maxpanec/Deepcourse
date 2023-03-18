@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react'
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import './Forget_password.css'
 
-const ForgetPassword = () => {
+import "./Forget_username.css"
+
+const ForgetUsername = () => {
     const navigate = useNavigate();
 	const [data, setData] = useState({ 
 		email: "", 
-		username: "" 
 	});
 	const [error, setError] = useState("");
 
@@ -21,10 +21,10 @@ const ForgetPassword = () => {
     const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = "http://localhost:3001/accounts/forget-password";
+			const url = "http://localhost:3001/accounts/forget-username";
 			await axios.post(url, data);
 			navigate(
-                '/forget-password/reset',
+                '/forget-username/reset',
                 {state: data}
             );
 			window.location.reload();
@@ -42,27 +42,14 @@ const ForgetPassword = () => {
     const darkTheme = createTheme({ palette: {mode: 'dark'} });
 
     return (
-        <div className="forget_password_container">
-            <h1 className="header">Enter Username and Email</h1>
+        <div className="forget_username_container">
+            <h1 className="header">Enter Email</h1>
             <form onSubmit={handleSubmit}>
                 <ThemeProvider theme={darkTheme}>
                     <div className="forget-field-container">
                         <TextField
                             name="email"
                             label="Email"
-                            type="text"
-                            variant="outlined"
-                            required
-                            fullWidth
-                            onChange={handleChange}
-                            autoFocus
-                        />
-                    </div>
-
-                    <div className="forget-field-container">
-                        <TextField
-                            name="username"
-                            label="Username"
                             type="text"
                             variant="outlined"
                             required
@@ -90,4 +77,4 @@ const ForgetPassword = () => {
     );
 };
 
-export default ForgetPassword;
+export default ForgetUsername;

@@ -9,6 +9,8 @@ import About from './Components/About/About'
 import Footer from './Components/Footer/Footer';
 import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
 import ResetPassword from './Components/ForgetPassword/ResetPassword/ResetPassword';
+import ForgetUsername from './Components/ForgetUsername/ForgetUsername';
+import ResetUsername from './Components/ForgetUsername/ResetUsername/ResetUsername';
 import Error from './Components/Error/Error';
 
 function App() {
@@ -29,7 +31,9 @@ function App() {
 							<Route path="/about" exact element={<About/>}/>
 							{/*<Route path="/contact" exact element={<Contact/>}/>*/}
 							<Route path="/forget-password" exact element={<ForgetPassword/>}/>
-							<Route path="/forget-password/reset-password" exact element={<ResetPassword/>}/>
+							<Route path="/forget-password/reset" exact element={<ResetPassword/>}/>
+							<Route path="/forget-username" exact element={<ForgetUsername/>}/>
+							<Route path="forget-username/reset" exact element={<ResetUsername/>}/>
 							<Route path="*" element={<Error/>}/>
 						</Routes>
 					</div>
