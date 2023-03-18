@@ -4,6 +4,7 @@ const cors = require("cors");
 mongoose.set('strictQuery', false);
 
 const accountRoutes = require('./routes/accounts')
+const flashcardRoutes = require('./routes/flashcards')
 
 
 const app = express();
@@ -11,6 +12,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("/accounts", accountRoutes)
+app.use("/flashcards", flashcardRoutes)
+
 
 try{
 	mongoose.connect(
