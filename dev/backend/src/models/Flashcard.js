@@ -10,8 +10,9 @@ const FlashcardSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
-    questions: {
+    cards: {
         type: [QnA],
+        require: true,
         validate: v => Array.isArray(v) && v.length > 0,
     },
     scores: [{
@@ -20,5 +21,5 @@ const FlashcardSchema = new mongoose.Schema({
     }],
 });
 
-const flashcardModel = mongoose.model("flashcard", FlashcardSchema);
-module.exports = flashcardModel;
+const Flashcard = mongoose.model("flashcard", FlashcardSchema);
+module.exports = Flashcard;

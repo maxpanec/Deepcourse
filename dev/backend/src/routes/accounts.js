@@ -17,8 +17,11 @@ router.post("/signin", async(req,res) => {
         if (!validPassword)
             return res.status(401).json({message: "Invalid Email/Username or Password"})
 
-        const token = user.generateAuthToken()
-        res.status(200).json({data: token})
+        //const token = user.generateAuthToken()
+        const userData = {
+            username: user.username
+        }
+        res.status(200).json({data: userData})
 
     } catch (error) {
         res.status(500).json({message: "Internal Server Error"})
@@ -42,19 +45,19 @@ router.post("/signup", async (req, res) => {
         const salt = await bcrypt.genSalt(Number(10))
         const hashPassword = await bcrypt.hash(req.body.password, salt)
 
-        let newUser = await new User({...req.body, password: hashPassword}).save()
-        res.status(201).json({message: "User created successfully"})
+        await new User({...req.body, password: hashPassword}).save()
+        res.status(201).json()
 
     } catch (error) {
         res.status(500).json({message: "Internal Server Error"})
     }
 })
 
-router.post("/forgotpassword", async (req, res) => {
+router.put("/password", async (req, res) => {
     try {
         const user = await User.findOne({email: req.body.email})
         if (!user)
-            return res.status(409).json({message: "Invalid Email"})
+            return res.status(401).json({message: "Invalid Email"})
         
         const {error} = validatePassword({password: req.body.password})
         if (error)
@@ -64,7 +67,7 @@ router.post("/forgotpassword", async (req, res) => {
         const hashPassword = await bcrypt.hash(req.body.password, salt)
 
         user.password = hashPassword;
-        user.save();
+        await user.save();
 
         res.status(201).json({message: "User password updated"})
 
@@ -73,18 +76,18 @@ router.post("/forgotpassword", async (req, res) => {
     }
 })
 
-router.post("/forgotusername", async (req, res) => {
+router.put("/username", async (req, res) => {
     try {
         const user = await User.findOne({email: req.body.email})
         if (!user)
-            return res.status(409).json({message: "Invalid Email"})
+            return res.status(401).json({message: "Invalid Email"})
         
         const {error} = validateUsername({username: req.body.username})
         if (error)
             return res.status(400).json({message: error.details[0].message})
             
         user.username = req.body.username
-        user.save();
+        await user.save();
 
         res.status(201).json({message: "User username updated"})
 
@@ -93,41 +96,41 @@ router.post("/forgotusername", async (req, res) => {
     }
 })
 
-router.post("/deleteuser", async (req, res) => {
-    try {
-        const user = await User.findOne({email: req.body.email})
-        if (!user)
-            return res.status(409).json({message: "Invalid Email"})
+// router.delete("/deleteuser", async (req, res) => {
+//     try {
+//         const user = await User.findOne({email: req.body.email})
+//         if (!user)
+//             return res.status(401).json({message: "Invalid Email"})
         
-        user.delete();
+//         user.delete();
 
-        res.status(201).json({message: "User has been deleted"})
+//         res.status(200).json({message: "User has been deleted"})
 
-    } catch (error) {
-        res.status(500).json({message: "Internal Server Error"})
-    }
-})
+//     } catch (error) {
+//         res.status(500).json({message: "Internal Server Error"})
+//     }
+// })
 
-router.get("/getallusers", async (req, res) => {
-    try {
-        const users = await User.find({})
+// router.get("/users", async (req, res) => {
+//     try {
+//         const users = await User.find({})
 
-        const userList = []
-        users.forEach(user => {
-            userList.push(
-                {
-                    email: user.email,
-                    username: user.username,
-                }
-            )
-        });
+//         const userList = []
+//         users.forEach(user => {
+//             userList.push(
+//                 {
+//                     email: user.email,
+//                     username: user.username,
+//                 }
+//             )
+//         });
 
-        res.status(201).json({data: userList})
+//         res.status(200).json({data: userList})
 
-    } catch (error) {
-        res.status(500).json({message: "Internal Server Error"})
-    }
-})
+//     } catch (error) {
+//         res.status(500).json({message: "Internal Server Error"})
+//     }
+// })
 
 const validatePassword = (data) => {
 	const schema = Joi.object({
