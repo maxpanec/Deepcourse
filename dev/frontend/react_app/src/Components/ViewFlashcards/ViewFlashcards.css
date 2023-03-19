@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin-top: 2rem;
+}
+
+.flashcard {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 80%;
+    max-width: 600px;
+}
+
+.flashcard h2 {
+    margin-top: 0;
+}
+
+.flashcard p {
+    margin-bottom: 0.5rem;
+}
+
+.edit-link {
+    margin-top: 0.5rem;
+    display: inline-block;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.edit-link:hover {
+    background-color: #ccc;
+}
