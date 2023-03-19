@@ -6,13 +6,13 @@ import './ViewFlashcards.css';
 function ViewFlashcards(props) {
   const [flashcards, setFlashcards] = useState([]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     async function fetchData() {
       const response = await axios.get(`/api/flashcards/${props.match.params.setId}`);
       setFlashcards(response.data);
     }
     fetchData();
-  }, [props.match.params.setId]);
+  }, [props.match.params.setId]);*/
 
   return (
     <div>
