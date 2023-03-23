@@ -44,7 +44,7 @@ const ResetUsername = () => {
 
     return (
         <div className="reset_username_container">
-            <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em"}}>Reset Password</h1>
+            <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em"}}>Reset Username</h1>
             <form onSubmit={handleSubmit}>
                 <ThemeProvider theme={darkTheme}>
                     <div className='reset_username_field_container'>
