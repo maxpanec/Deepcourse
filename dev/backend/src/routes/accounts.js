@@ -4,6 +4,17 @@ const Joi = require('joi');
 const passwordComplexity = require("joi-password-complexity")
 const bcrypt = require("bcrypt")
 
+// BASE URL FOR TESTING API ENDPOINTS http://localhost:3001/accounts/
+
+/*
+    Expected Format of req.body
+    {
+        //username or email for the user
+        "username_email":String,
+        //password of the user
+        "password":String,
+    }
+*/
 router.post("/signin", async(req,res) => {
     try {
         const user = await User.findOne(
@@ -28,6 +39,15 @@ router.post("/signin", async(req,res) => {
     }
 })
 
+/*
+    Expected Format of req.body
+    {
+        //email for the user
+        "email":String,
+        //username of the user
+        "username":String,
+    }
+*/
 router.post("/forget-password", async (req, res) => {
     try{
         const email = await User.findOne({email: req.body.email})
@@ -43,6 +63,17 @@ router.post("/forget-password", async (req, res) => {
     }
 })
 
+/*
+    Expected Format of req.body
+    {
+        //email for the user
+        "email":String,
+        //new password for user
+        "password":String,
+        //confirmation of new password for user
+        "confirmed_password":String,
+    }
+*/
 router.post("/forget-password/reset", async (req, res) => {
     try{
         let password = req.body.password
@@ -71,6 +102,13 @@ router.post("/forget-password/reset", async (req, res) => {
     }
 })
 
+/*
+    Expected Format of req.body
+    {
+        //email for the user
+        "email":String,
+    }
+*/
 router.post("/forget-username", async (req, res) => {
     try {
         const user = await User.findOne({email: req.body.email})
@@ -83,6 +121,15 @@ router.post("/forget-username", async (req, res) => {
     }
 })
 
+/*
+    Expected Format of req.body
+    {
+        //email for the user
+        "email":String,
+        //new username for user
+        "username":String,
+    }
+*/
 router.post("/forget-username/reset", async(req, res) => {
     try{
         const user = await User.findOne({email: req.body.email})
@@ -103,6 +150,17 @@ router.post("/forget-username/reset", async(req, res) => {
     }
 })
 
+/*
+    Expected Format of req.body
+    {
+        //username for the new user
+        "username":String,
+        //email for the new user
+        "email":String,
+        //password for the new user
+        "password":String,
+    }
+*/
 router.post("/signup", async (req, res) => {
     try {
         const {error} = validate(req.body)
@@ -128,48 +186,48 @@ router.post("/signup", async (req, res) => {
     }
 })
 
-router.put("/password", async (req, res) => {
-    try {
-        const user = await User.findOne({email: req.body.email})
-        if (!user)
-            return res.status(401).json({message: "Invalid Email"})
+// router.put("/password", async (req, res) => {
+//     try {
+//         const user = await User.findOne({email: req.body.email})
+//         if (!user)
+//             return res.status(401).json({message: "Invalid Email"})
         
-        const {error} = validatePassword({password: req.body.password})
-        if (error)
-            return res.status(400).json({message: error.details[0].message})
+//         const {error} = validatePassword({password: req.body.password})
+//         if (error)
+//             return res.status(400).json({message: error.details[0].message})
         
-        const salt = await bcrypt.genSalt(Number(10))
-        const hashPassword = await bcrypt.hash(req.body.password, salt)
+//         const salt = await bcrypt.genSalt(Number(10))
+//         const hashPassword = await bcrypt.hash(req.body.password, salt)
 
-        user.password = hashPassword;
-        await user.save();
+//         user.password = hashPassword;
+//         await user.save();
 
-        res.status(201).json({message: "User password updated"})
+//         res.status(201).json({message: "User password updated"})
 
-    } catch (error) {
-        res.status(500).json({message: "Internal Server Error"})
-    }
-})
+//     } catch (error) {
+//         res.status(500).json({message: "Internal Server Error"})
+//     }
+// })
 
-router.put("/username", async (req, res) => {
-    try {
-        const user = await User.findOne({email: req.body.email})
-        if (!user)
-            return res.status(401).json({message: "Invalid Email"})
+// router.put("/username", async (req, res) => {
+//     try {
+//         const user = await User.findOne({email: req.body.email})
+//         if (!user)
+//             return res.status(401).json({message: "Invalid Email"})
         
-        const {error} = validateUsername({username: req.body.username})
-        if (error)
-            return res.status(400).json({message: error.details[0].message})
+//         const {error} = validateUsername({username: req.body.username})
+//         if (error)
+//             return res.status(400).json({message: error.details[0].message})
             
-        user.username = req.body.username
-        await user.save();
+//         user.username = req.body.username
+//         await user.save();
 
-        res.status(201).json({message: "User username updated"})
+//         res.status(201).json({message: "User username updated"})
 
-    } catch (error) {
-        res.status(500).json({message: "Internal Server Error"})
-    }
-})
+//     } catch (error) {
+//         res.status(500).json({message: "Internal Server Error"})
+//     }
+// })
 
 // router.delete("/deleteuser", async (req, res) => {
 //     try {
