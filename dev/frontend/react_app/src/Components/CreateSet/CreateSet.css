@@ -93,3 +93,13 @@ table, th, td {
 .btn-create:hover {
     background-color: #1976d2;
 }
+
+.msg-container {
+    margin-top: 1rem;
+}
+
+.err-msg {
+	color: #f34646;
+	text-align: center;
+	font-size: 14px;
+}

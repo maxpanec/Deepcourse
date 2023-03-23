@@ -15,9 +15,9 @@ const CreateSet = () => {
     const [error, setError] = useState("");
     
     const [data, setData] = useState({
-        id: "",
+        username: "",
         setName: "",
-        QnAs: [],
+        cards: [],
     });
 
     const loggedInUser = localStorage.getItem('data');
@@ -32,12 +32,22 @@ const CreateSet = () => {
         const handleAddRow = () => {
             const item = {};
             setCards([...cards, item]);
+            setData({
+                ...data,
+                username: username,
+                setName: title,
+                cards: cards,
+            });
         };
     
         const handleRemoveRow = (number) => {
             const temp = [...cards];
             temp.splice(number, 1);
             setCards(temp);
+            setData({
+                ...data,
+                cards: temp,
+            });
         }
     
         const updateState = (e) => {
@@ -51,32 +61,40 @@ const CreateSet = () => {
             
             temp[index] = tempObj;
             setCards(temp);
+            setData({
+                ...data,
+                username: username,
+                cards: temp,
+            });
           };
+
+        const handleTitleChange =  (e) => {
+            setTitle(e.target.value)
+            setData({
+                ...data,
+                username: username,
+                setName: e.target.value,
+            }); 
+        }
     
         const handleSubmit = async (e) => {
             e.preventDefault();
-            setData({
-                ...data,
-                id: username,
-                setName: title,
-                QnAs: cards,
-            });
             console.log(data);
-            // try {
-            //     const url = "http://localhost:3001/flashcards/flashcard-set"
-            //     await axios.get(url, data);
-            //     navigate("/");
-            //     window.location.reload();
-            // }
-            // catch(error) {
-            //     if (
-            //         error.response &&
-            //         error.response.status >= 400 &&
-            //         error.response.status <= 500
-            //     ) {
-            //         setError(error.response.data.message);
-            //     }
-            // }
+            try {
+                const url = "http://localhost:3001/flashcards/flashcard-set"
+                await axios.post(url, data);
+                navigate("/");
+                window.location.reload();
+            }
+            catch(error) {
+                if (
+                    error.response &&
+                    error.response.status >= 400 &&
+                    error.response.status <= 500
+                ) {
+                    setError(error.response.data.message);
+                }
+            }
         }
     
         return (
@@ -89,7 +107,7 @@ const CreateSet = () => {
                             label="Set title"
                             type="text"
                             variant="outlined"
-                            onChange={(e) => setTitle(e.target.value)}
+                            onChange={handleTitleChange}
                             required
                             InputLabelProps={{
                                 style: {color: 'white'}
@@ -144,7 +162,7 @@ const CreateSet = () => {
                         </table>
                         <button onClick={handleAddRow} className="btn-add" type='button'>Add Row</button>
                     </div>
-                    {error && <div className="error_msg">{error}</div>}
+                    <div className='msg-container'>{error && <div className="error_msg">{error}</div>}</div>
                     <button onSubmit={handleSubmit} className="btn-create">Create Set</button>
                 </form>
             </div>
