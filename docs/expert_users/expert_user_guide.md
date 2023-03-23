@@ -44,7 +44,7 @@ optionally follow build and check status of product to view old build
 install Postman from https://www.postman.com  
 find API endpoints in github directory https://github.com/maxpanec/Deepcourse/tree/main/dev/backend/src/routes  
 each file in directory contains API endpoints  
-each file contains the base url for the API endpoints  
+each file contains the base url for the API endpoints at the top of the file  
 each API endpoint has documentation for expected body or query parameters  
 see example postman request below  
 ![Cannot Display Example Image](./postman_example.png)
