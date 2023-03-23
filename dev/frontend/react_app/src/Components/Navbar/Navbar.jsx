@@ -22,7 +22,7 @@ const Navbar = (props)  => {
                 <ul>
                     <Link to='/'><li className='navbar_item'>Home</li></Link>
                     <Link to='/'><li className='navbar_item'>Create Flashcards</li></Link>
-                    <Link to='/'><li className='navbar_item'>View Flashcards</li></Link>
+                    <Link to='/flashcard-view'><li className='navbar_item'>View Flashcards</li></Link>
                     {
                         props.user ?
                         <Link onClick={signout} to='/'><li className='navbar_item'>Sign Out</li></Link> :
