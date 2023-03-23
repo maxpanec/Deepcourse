@@ -42,9 +42,21 @@ optionally follow build and check status of product to view old build
 
 ## How to test API endpoints
 install Postman from https://www.postman.com  
+build the backend (instructions above)  
 find API endpoints in github directory https://github.com/maxpanec/Deepcourse/tree/main/dev/backend/src/routes  
 each file in directory contains API endpoints  
 each file contains the base url for the API endpoints at the top of the file  
 each API endpoint has documentation for expected body or query parameters  
 see example postman request below  
 ![Cannot Display Example Image](./postman_example.png)
+
+## How to verify progress
+
+### Frontend
+build the frontend and backend (instructions above)
+navigate to frontend url (instructions above)
+you can now see the current status of our frontend
+
+### Backend
+build the backend (instructions above)  
+to test a given API endpoint follow instructions on testing API endpoints above  
