@@ -21,16 +21,8 @@ const Navbar = (props)  => {
             <div className='navbar_links'>
                 <ul>
                     <Link to='/'><li className='navbar_item'>Home</li></Link>
-                    {
-                        props.user ?
-                        <Link to='/create-set'><li className='navbar_item'>Create Flashcards</li></Link> :
-                        <Link to='/signin'><li className='navbar_item'>Create Flashcards</li></Link>
-                    }
-                    {
-                        props.user ?
-                        <Link to='/view-set'><li className='navbar_item'>View Flashcards</li></Link> :
-                        <Link to='/signin'><li className='navbar_item'>View Flashcards</li></Link>
-                    }
+                    <Link to='/create-set'><li className='navbar_item'>Create Flashcards</li></Link> 
+                    <Link to='/view-set'><li className='navbar_item'>View Flashcards</li></Link> 
                     {
                         props.user ?
                         <Link onClick={signout} to='/'><li className='navbar_item'>Sign Out</li></Link> :

@@ -35,7 +35,7 @@ function App() {
 							<Route path="/forget-password/reset" exact element={<ResetPassword/>}/>
 							<Route path="/forget-username" exact element={<ForgetUsername/>}/>
 							<Route path="/forget-username/reset" exact element={<ResetUsername/>}/>
-							<Route path="/create-set" exact element={<CreateSet/>}/>
+							<Route path="/create-set" exact element={<CreateSet/>} />
 							<Route path="*" element={<Error/>}/>
 						</Routes>
 					</div>
