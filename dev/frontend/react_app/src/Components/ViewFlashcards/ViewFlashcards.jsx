@@ -4,7 +4,11 @@ import axios from 'axios';
 import './ViewFlashcards.css';
 
 function ViewFlashcards(props) {
-  const [flashcards, setFlashcards] = useState([]);
+  const [flashcards, setFlashcards] = useState([
+     { id: 1, frontText: "C++ beginner", backText: "React is a JavaScript library for building user interfaces.", category: "Programming" },
+    { id: 2, frontText: "France", backText: "Places in France", category: "Geography" },
+    { id: 3, frontText: "Chemistry elements", backText: "Fe, Al, Cu, etc", category: "Chemistry" },
+  ]);
 
   /*useEffect(() => {
     async function fetchData() {
