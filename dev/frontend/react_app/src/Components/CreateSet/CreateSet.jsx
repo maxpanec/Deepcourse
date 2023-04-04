@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Navigate } from "react-router-dom";
 import { TextField } from '@mui/material';
@@ -22,6 +22,17 @@ const CreateSet = () => {
 
     const loggedInUser = localStorage.getItem('data');
 
+    useEffect(() => {
+        const unloadCallback = (event) => {
+          event.preventDefault();
+          event.returnValue = "";
+          return "";
+        };
+      
+        window.addEventListener("beforeunload", unloadCallback);
+        return () => window.removeEventListener("beforeunload", unloadCallback);
+    }, []);
+
     if(loggedInUser === null) {
         return <Navigate replace to="/signin"/>
     }
@@ -31,17 +42,19 @@ const CreateSet = () => {
     
         const handleAddRow = () => {
             const item = {};
-            setCards([...cards, item]);
+            const temp = [...cards, item];
+            setCards(temp);
             setData({
                 ...data,
                 username: username,
                 setName: title,
-                cards: cards,
+                cards: temp,
             });
+            console.log(temp);
         };
     
         const handleRemoveRow = (number) => {
-            const temp = [...cards];
+            let temp = [...cards];
             temp.splice(number, 1);
             setCards(temp);
             setData({
