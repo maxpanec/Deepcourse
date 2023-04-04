@@ -2,6 +2,8 @@ const router = require("express").Router();
 const {User} = require("../models/User")
 const Flashcard = require("../models/Flashcard")
 
+// BASE URL FOR TESTING API ENDPOINTS http://localhost:3001/flashcards/
+
 /*
     Expected Format of req.body
     {
@@ -11,6 +13,7 @@ const Flashcard = require("../models/Flashcard")
         "setName":String,
         //array of objects with each object having keys question and answer representing 
         //the question and answer for an individual flashcard
+        //this example only contains two question answer pairs but the number can be any number 1 or greater
         "cards": [
             {
                 "question":String,
@@ -51,6 +54,7 @@ router.post("/flashcard-set", async(req,res) => {
         //array of objects with keys name and id
         //name is the name of the study set
         //id is the object id of the study set (used to retrieve data from a single study set)
+        //the amount of elements in data will be 0 or more
         "data": [
             {
                 "name": String,
@@ -103,6 +107,7 @@ router.get("/flashcard-sets-info", async(req,res) => {
             "createdBy": "maxtest",
             //array of objects with each object having keys question and answer representing 
             //the question and answer for an individual flashcard
+            //this example only contains two question answer pairs but the number can be any number 1 or greater
             "cards": [
                 {
                     "question": "Q1",
