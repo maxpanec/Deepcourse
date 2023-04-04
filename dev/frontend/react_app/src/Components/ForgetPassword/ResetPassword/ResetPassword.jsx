@@ -1,28 +1,31 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
 import { Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./ResetPassword.css"
 
 const ResetPassword = () => {
     const location = useLocation();
-    console.log(location);
-    let userEmail = location.state.email;
-    let userUsername = location.state.username;
-
     const navigate = useNavigate();
+
     const [data, setData] = useState({
-        email: userEmail,
-        username: userUsername,
+        email: "",
+        username: "",
         password: "",
         confirmed_password: ""
-    })
+    });
+
     const [error, setError] = useState("");
 
+    const darkTheme = createTheme({ palette: {mode: 'dark'} });
+
     const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
+        setData({ ...data, 
+            email: location.state.email,
+            username: location.state.username,         
+            [e.target.name]: e.target.value});
 	};
 
     const handleSubmit = async (e) => {
@@ -43,16 +46,29 @@ const ResetPassword = () => {
 		}
 	};
 
-    const darkTheme = createTheme({ palette: {mode: 'dark'} });
-
-    return (
-        <div className="reset_password_container">
-            <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em"}}>Reset Password</h1>
-            <form onSubmit={handleSubmit}>
-                <ThemeProvider theme={darkTheme}>
-                    <div className='reset_password_field_container'>
+    if(location.state === null){
+        return <Navigate replace to="/"/>
+    }
+    else{
+        return (
+            <div className="reset_password_container">
+                <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em"}}>Reset Password</h1>
+                <form onSubmit={handleSubmit}>
+                    <ThemeProvider theme={darkTheme}>
+                        <div className='reset_password_field_container'>
+                            <TextField
+                                name="password"
+                                label="Password"
+                                type="password"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className='reset_password_field_container'>
                         <TextField
-                            name="password"
+                            name="confirmed_password"
                             label="Password"
                             type="password"
                             variant="outlined"
@@ -61,33 +77,23 @@ const ResetPassword = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className='reset_password_field_container'>
-                    <TextField
-                        name="confirmed_password"
-                        label="Password"
-                        type="password"
-                        variant="outlined"
-                        required
+                    </ThemeProvider>
+                    {error && <div className="error_msg">{error}</div>}
+                    <Button type='submit' variant="contained" color="primary" fullWidth>Reset Password</Button>
+                </form>
+                <div className="back" >
+                    <Button
+                        variant="contained" 
+                        color="primary" 
                         fullWidth
-                        onChange={handleChange}
-                    />
+                        component={Link}
+                        to="/signin">
+                        Back
+                    </Button>
                 </div>
-                </ThemeProvider>
-                {error && <div className="error_msg">{error}</div>}
-                <Button type='submit' variant="contained" color="primary" fullWidth>Reset Password</Button>
-            </form>
-            <div className="back" >
-                <Button
-                    variant="contained" 
-                    color="primary" 
-                    fullWidth
-                    component={Link}
-                    to="/signin">
-                    Back
-                </Button>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default ResetPassword;
