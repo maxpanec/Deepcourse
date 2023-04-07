@@ -1,31 +1,61 @@
-.flashcard {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 1rem;
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quiz-title {
+    font-size: 24px;
     margin-bottom: 1rem;
-    width: 80%;
-    max-width: 600px;
 }
 
-.flashcard h2 {
-    margin-top: 0;
+.quiz-list {
+    border: 1px solid #000;
+    padding: 1rem;
 }
 
-.flashcard p {
+.quiz-list-title {
+    font-size: 20px;
+    margin-bottom: 1rem;
+}
+
+.quiz-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.quiz-box {
+    border: 1px solid #000;
+    padding: 1rem;
+    background-color: #000;
+    /* Set background color for quiz boxes to black */
+    color: #fff;
+    /* Set text color to white */
+    transition: background-color 0.3s ease-in-out;
+    /* Add transition effect for hover */
+}
+
+.quiz-box:hover {
+    background-color: #111;
+    /* Change background color to a slightly darker shade of black on hover */
+}
+
+.quiz-box-title {
+    font-size: 18px;
     margin-bottom: 0.5rem;
 }
 
-.edit-link {
-    margin-top: 0.5rem;
-    display: inline-block;
-    background-color: #eee;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    color: #333;
-    text-decoration: none;
+.quiz-box-description {
+    margin-bottom: 0.5rem;
 }
 
-.edit-link:hover {
-    background-color: #ccc;
+.quiz-box-category {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.quiz-box-link {
+    display: block;
+    text-decoration: none;
+    color: #007bff;
 }
