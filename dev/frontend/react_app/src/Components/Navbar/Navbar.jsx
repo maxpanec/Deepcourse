@@ -6,9 +6,12 @@ import "./Navbar.css"
 const Navbar = (props)  => {
 	const navigate = useNavigate();
     const signout = () => {
-        localStorage.clear()
-        navigate("/");
-        window.location.reload()
+        const resp = window.confirm("Do you want to logout?");
+        if(resp){
+            localStorage.clear();
+            navigate("/");
+            Navbar.location.reload();
+        }
     }
 
     return (
@@ -21,9 +24,6 @@ const Navbar = (props)  => {
             <div className='navbar_links'>
                 <ul>
                     <Link to='/'><li className='navbar_item'>Home</li></Link>
-                    <Link to='/'><li className='navbar_item'>Create Flashcards</li></Link>
-                    <Link to='/'><li className='navbar_item'>View Flashcards</li></Link>
-
                     {/* Eventually, this link should be removed from the Navbar */}
                     {/* Should only be accessed by clicking on an individual study set from the view-all page */}
                     {/* The parameter after flashcard-view/ is the ID of the individual flashcard set */}
@@ -33,7 +33,7 @@ const Navbar = (props)  => {
                     <Link to='/view-set'><li className='navbar_item'>View Flashcards</li></Link> 
                     {
                         props.user ?
-                        <Link onClick={signout} to='/'><li className='navbar_item'>Sign Out</li></Link> :
+                        <Link onClick={signout}><li className='navbar_item'>Sign Out</li></Link> :
                         <Link to='/signin'><li className='navbar_item'>Sign In</li></Link>
                     }
                 </ul>
