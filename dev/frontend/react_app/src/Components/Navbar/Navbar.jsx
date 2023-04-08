@@ -23,7 +23,7 @@ const Navbar = (props)  => {
                     <Link to='/'><li className='navbar_item'>Home</li></Link>
                     <Link to='/'><li className='navbar_item'>Create Flashcards</li></Link>
                     <Link to='/'><li className='navbar_item'>View Flashcards</li></Link>
-                    <Link to='/flashcard-view'><li className='navbar_item'>View Sample Set</li></Link>
+                    <Link to='/flashcard-view/sample'><li className='navbar_item'>View Flashcard Set</li></Link>
 
                     {
                         props.user ?
