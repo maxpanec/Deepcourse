@@ -21,6 +21,10 @@ const Navbar = (props)  => {
             <div className='navbar_links'>
                 <ul>
                     <Link to='/'><li className='navbar_item'>Home</li></Link>
+                    <Link to='/'><li className='navbar_item'>Create Flashcards</li></Link>
+                    <Link to='/'><li className='navbar_item'>View Flashcards</li></Link>
+                    <Link to='/flashcard-view/sample'><li className='navbar_item'>View Flashcard Set</li></Link>
+
                     <Link to='/create-set' onClick={() => window.location.href('/create-set')}><li className='navbar_item'>Create Flashcards</li></Link> 
                     <Link to='/view-set'><li className='navbar_item'>View Flashcards</li></Link> 
                     {
