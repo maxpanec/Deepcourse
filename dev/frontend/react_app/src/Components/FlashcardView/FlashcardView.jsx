@@ -1,7 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios"
-
 import "./FlashcardView.css";
 
 //sample flashcard set for testing purposes
@@ -46,7 +45,6 @@ let sampleFlashcardSet = {
 }
 
 
-
 let flashcards = sampleFlashcardSet["data"]["cards"];
 
 let cardData = flashcards.map((card) => 
@@ -70,7 +68,6 @@ const FlashcardView = (props) => {
                 <h1 class="set-title">{sampleFlashcardSet["data"]["name"]}</h1>
                 <h2 className="creator">Created by: {sampleFlashcardSet["data"]["createdBy"]}</h2>
                 <h2>ID: {id}</h2> {/* can be removed, only here for testing purposes */}
-                <h2>Result: {result["message"]}</h2>
             </div>
             <div className="flashcard-grid">
                 {cardData}
