@@ -12,6 +12,7 @@ import ResetPassword from './Components/ForgetPassword/ResetPassword/ResetPasswo
 import ForgetUsername from './Components/ForgetUsername/ForgetUsername';
 import ResetUsername from './Components/ForgetUsername/ResetUsername/ResetUsername';
 import FlashcardView from './Components/FlashcardView/FlashcardView';
+import CreateSet from './Components/CreateSet/CreateSet';
 import Error from './Components/Error/Error';
 
 function App() {
@@ -36,6 +37,8 @@ function App() {
 							<Route path="/forget-username" exact element={<ForgetUsername/>}/>
 							<Route path="forget-username/reset" exact element={<ResetUsername/>}/>
 							<Route path="flashcard-view/:id" exact element={<FlashcardView/>}/>
+							<Route path="/forget-username/reset" exact element={<ResetUsername/>}/>
+							<Route path="/create-set" exact element={<CreateSet/>} />
 							<Route path="*" element={<Error/>}/>
 						</Routes>
 					</div>
