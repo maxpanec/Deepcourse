@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './ViewFlashcards.css'; // Import the CSS file
+import './ViewStudySets.css'; // Import the CSS file
 
-const ViewFlashcards = () => {
+const ViewStudySets = () => {
   // State to hold the list of quizzes
   const [quizzes, setQuizzes] = useState([
     { id: 1, title: 'Quiz 1', description: 'This is quiz 1', category: 'Category 1' },
@@ -14,9 +14,9 @@ const ViewFlashcards = () => {
 
   return (
     <div className="quiz-container">
-      <h1 className="quiz-title">View Flashcards</h1>
+      <h1 className="quiz-title">View Study Sets</h1>
       <div className="quiz-list">
-        <h2 className="quiz-list-title">Quizzes</h2>
+        <h2 className="quiz-list-title">Current Study Sets</h2>
         <div className="quiz-grid">
           {quizzes.map(quiz => (
             <div key={quiz.id} className="quiz-box">
@@ -32,4 +32,4 @@ const ViewFlashcards = () => {
   );
 };
 
-export default ViewFlashcards;
+export default ViewStudySets;
