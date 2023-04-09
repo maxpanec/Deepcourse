@@ -10,15 +10,26 @@ const CreateSet = () => {
     const [title, setTitle] = useState({ 
         title: "", 
     });
-    const [cards, setCards] = useState([]);
-    const columns = ["question", "answer"];
+    const [cards, setCards] = useState([{question: "", answer: ""}]);
+    const [draggingIndex, setDraggingIndex] = useState(null);
+
+    const handleTitleChange = (e) => {
+        setTitle(e.target.value);
+    }
+
+    const handleQuestionChange = (e, index) => {
+        const temp = [...cards];
+        temp[index].question = e.target.value;
+        setCards(temp);
+    }
+
+    const handleAnswerChange = (e, index) => {
+        const temp = [...cards];
+        temp[index].answer = e.target.value;
+        setCards(temp);
+    } 
+
     const [error, setError] = useState("");
-    
-    const [data, setData] = useState({
-        username: "",
-        setName: "",
-        cards: [],
-    });
 
     const loggedInUser = localStorage.getItem('data');
 
@@ -41,63 +52,49 @@ const CreateSet = () => {
         const username = info.username;
     
         const handleAddRow = () => {
-            const item = {};
-            const temp = [...cards, item];
-            setCards(temp);
-            setData({
-                ...data,
-                username: username,
-                setName: title,
-                cards: temp,
-            });
-            console.log(temp);
+            setCards([...cards, { question: "", answer: ""}]);
         };
     
-        const handleRemoveRow = (number) => {
+        const handleRemoveRow = (index) => {
             let temp = [...cards];
-            temp.splice(number, 1);
-            setCards(temp);
-            setData({
-                ...data,
-                cards: temp,
-            });
-        }
-    
-        const updateState = (e) => {
-            let prope = e.target.attributes.column.value;
-            let index = e.target.attributes.index.value; 
-            let fieldValue = e.target.value;
-        
-            const temp = [...cards]; 
-            const tempObj = cards[index];  
-            tempObj[prope] = fieldValue; 
-            
-            temp[index] = tempObj;
-            setCards(temp);
-            setData({
-                ...data,
-                username: username,
-                cards: temp,
-            });
-          };
+            temp.splice(index, 1);
+            setCards(temp.map((row, index) => ({ ...row, index: index + 1 })));
+        };
 
-        const handleTitleChange =  (e) => {
-            setTitle(e.target.value)
-            setData({
-                ...data,
-                username: username,
-                setName: e.target.value,
-            }); 
-        }
+        const handleDragStart = (event, index) => {
+            setDraggingIndex(index);
+          };
+        
+        const handleDragOver = (event, index) => {
+            event.preventDefault();
+            if (draggingIndex !== null) {
+              const temp = [...cards];
+              const removedRow = temp.splice(draggingIndex, 1)[0];
+              temp.splice(index, 0, removedRow);
+              setCards(temp);
+              setDraggingIndex(index);
+            }
+        };
+        
+        const handleDragEnd = () => {
+            setDraggingIndex(null);
+        };
     
         const handleSubmit = async (e) => {
             e.preventDefault();
-            console.log(data);
             try {
                 const url = "http://localhost:3001/flashcards/flashcard-set"
-                await axios.post(url, data);
+                console.log({
+                    username: username,
+                    setName: title,
+                    cards: cards
+                });
+                await axios.post(url, {
+                    username: username,
+                    setName: title,
+                    cards: cards
+                })
                 navigate("/");
-                window.location.reload();
             }
             catch(error) {
                 if (
@@ -136,31 +133,38 @@ const CreateSet = () => {
                             <thead>
                                 <tr>
                                     <th className='center-text'>#</th>
-                                    {
-                                        columns.map((column, index) => (
-                                            <th className='center-text' key={index}>
-                                                {column}
-                                            </th>
-                                        ))
-                                    }
+                                    <th className='center-text'>Question</th>
+                                    <th className='center-text'>Answer</th> 
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     cards.map((item, index) => (
                                         <tr key={index}>
-                                            <td className='center-text'>{index + 1}</td>
-                                            {columns.map((column, idx) => (
-                                                <td key={idx}>
-                                                    <textarea className='area'
-                                                        type='text'
-                                                        value={cards[index][column]}
-                                                        index={index}
-                                                        column={column}
-                                                        onChange={(e) => updateState(e)}
-                                                        required/>
-                                                </td> 
-                                            ))}
+                                            <td 
+                                                className='center-text index-col'
+                                                draggable="true"
+                                                onDragStart={(event) => handleDragStart(event, index)}
+                                                onDragOver={(event) => handleDragOver(event, index)}
+                                                onDragEnd={handleDragEnd}>
+                                                    {index + 1}
+                                            </td>
+                                            <td>
+                                                <textarea className='area'
+                                                    type='text'
+                                                    value={item.question}
+                                                    onChange={(e) => handleQuestionChange(e, index)}
+                                                    required
+                                                />
+                                            </td>
+                                            <td>
+                                                <textarea className='area'
+                                                    type='text'
+                                                    value={item.answer}
+                                                    onChange={(e) => handleAnswerChange(e, index)}
+                                                    required
+                                                />
+                                            </td>
                                             <td>
                                                 <button
                                                     className="btn-rm"

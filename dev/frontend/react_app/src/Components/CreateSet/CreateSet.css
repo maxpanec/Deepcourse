@@ -90,6 +90,10 @@ table, th, td {
     font-weight: bold; 
 }
 
+.index-col {
+    cursor: pointer;
+}
+
 .btn-create:hover {
     background-color: #1976d2;
 }
