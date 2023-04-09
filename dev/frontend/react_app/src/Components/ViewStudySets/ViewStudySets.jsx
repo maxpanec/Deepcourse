@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './ViewStudySets.css';
 
-const ViewStudySets = () => {
+const ViewStudySets = (props) => {
+  const navigate = useNavigate();
+
   const [studySets, setStudySets] = useState([
     { id: 1, name: 'Study Set 1', category: 'Science', description: 'This is Study Set 1' },
     { id: 2, name: 'Study Set 2', category: 'History', description: 'This is Study Set 2' },
@@ -11,25 +14,27 @@ const ViewStudySets = () => {
   ]);
 
   useEffect(() => {
-    // Comment out the actual API call if you want to use the sample data above
-    // const fetchStudySets = async () => {
-    //   try {
-    //     const response = await axios.get('/api/flashcard-sets-info', {
-    //       params: { username: 'your-username' }, // Update with your actual username
-    //     });
-    //     setStudySets(response.data.data);
-    //   } catch (error) {
-    //     console.error('Error fetching study sets:', error);
-    //   }
-    // };
-    // fetchStudySets();
-  }, []);
+    const fetchStudySets = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/flashcards/flashcard-sets-info', 
+        {params: {username: props.user.username}}
+        );
+        setStudySets(response.data.data)
+        // navigate("/flashcard-view/64153e33e22b57cda9b80ffa")
+      }
+      catch (error) {
+        console.log("test error")
+      }
+    };
+    fetchStudySets()
+  }, [props.user.username]);
+
+  console.log(studySets)
 
   const handleStudySetClick = (setId) => {
     // Handle the study set click event, e.g. redirect to study set page
     console.log('Study Set clicked with id:', setId);
   };
-
   const handleRemoveStudySet = (setId) => {
     // Handle the study set removal event, e.g. send a request to remove study set
     console.log('Study Set removed with id:', setId);
