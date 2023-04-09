@@ -1,33 +1,75 @@
-import React, { useState } from 'react';
-import './ViewStudySets.css'; // Import the CSS file
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './ViewStudySets.css';
 
 const ViewStudySets = () => {
-  // State to hold the list of quizzes
-  const [quizzes, setQuizzes] = useState([
-    { id: 1, title: 'Quiz 1', description: 'This is quiz 1', category: 'Category 1' },
-    { id: 2, title: 'Quiz 2', description: 'This is quiz 2', category: 'Category 2' },
-    { id: 3, title: 'Quiz 3', description: 'This is quiz 3', category: 'Category 3' },
-    { id: 3, title: 'Quiz 4', description: 'This is quiz 4', category: 'Category 4' },
-    { id: 3, title: 'Quiz 5', description: 'This is quiz 5', category: 'Category 5' },
-    // Add more quizzes as needed
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Added isLoggedIn state
+
+  const [studySets, setStudySets] = useState([
+    { id: 1, name: 'Study Set 1', category: 'Science', description: 'This is Study Set 1' },
+    { id: 2, name: 'Study Set 2', category: 'History', description: 'This is Study Set 2' },
+    { id: 3, name: 'Study Set 3', category: 'Math', description: 'This is Study Set 3' },
+    // Add more sample data as needed
   ]);
 
+  useEffect(() => {
+    // Comment out the actual API call if you want to use the sample data above
+    // const fetchStudySets = async () => {
+    //   try {
+    //     const response = await axios.get('/api/flashcard-sets-info', {
+    //       params: { username: 'your-username' }, // Update with your actual username
+    //     });
+    //     setStudySets(response.data.data);
+    //   } catch (error) {
+    //     console.error('Error fetching study sets:', error);
+    //   }
+    // };
+    // fetchStudySets();
+
+    // Example check for user login status
+    const checkUserLoginStatus = async () => {
+      try {
+        const response = await axios.get('/api/check-user-login-status');
+        setIsLoggedIn(response.data.isLoggedIn);
+      } catch (error) {
+        console.error('Error checking user login status:', error);
+      }
+    };
+    checkUserLoginStatus();
+  }, []);
+
+  const handleStudySetClick = (setId) => {
+    // Handle the study set click event, e.g. redirect to study set page
+    console.log('Study Set clicked with id:', setId);
+  };
+
+  const handleRemoveStudySet = (setId) => {
+    // Handle the study set removal event, e.g. send a request to remove study set
+    console.log('Study Set removed with id:', setId);
+  };
+
   return (
-    <div className="quiz-container">
-      <h1 className="quiz-title">View Study Sets</h1>
-      <div className="quiz-list">
-        <h2 className="quiz-list-title">Current Study Sets</h2>
-        <div className="quiz-grid">
-          {quizzes.map(quiz => (
-            <div key={quiz.id} className="quiz-box">
-              <h3 className="quiz-box-title">{quiz.title}</h3>
-              <p className="quiz-box-description">{quiz.description}</p>
-              <p className="quiz-box-category">Category: {quiz.category}</p>
-              <a href={`/quiz/${quiz.id}`} className="quiz-box-link">Start Quiz</a>
+    <div className="study-sets-container">
+      <h1 className="study-sets-title">Study Sets</h1>
+      {isLoggedIn ? ( // Display study sets only if user is logged in
+        <div className="study-sets-grid">
+          {studySets.map((set) => (
+            <div key={set.id} className="study-set-box">
+              <h3 className="study-set-name">{set.name}</h3>
+              <p className="study-set-category">Category: {set.category}</p>
+              <p className="study-set-description">Description: {set.description}</p>
+              <button
+                className="remove-study-set-button"
+                onClick={() => handleRemoveStudySet(set.id)}
+              >
+                Remove
+              </button>
             </div>
           ))}
         </div>
-      </div>
+      ) : (
+        <p className="login-required-message">Please login to view study sets.</p>
+      )}
     </div>
   );
 };
