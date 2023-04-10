@@ -24,13 +24,11 @@ const ViewStudySets = (props) => {
 
   const handleStudySetClick = (setId) => {
     // Handle the study set click event, e.g. navigate to study set page
-    console.log('Study Set clicked with id:', setId);
     navigate(`/flashcard-view/${setId}`); // Use navigate function to navigate to the desired route
   };
 
   const handleRemoveStudySet = (setId) => {
     // Handle the study set removal event, e.g. send a request to remove study set
-    console.log('Study Set removed with id:', setId);
   };
 
   return (
