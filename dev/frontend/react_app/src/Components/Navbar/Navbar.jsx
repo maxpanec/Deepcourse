@@ -31,6 +31,7 @@ const Navbar = (props)  => {
 
                     <Link to='/create-set' onClick={() => window.location.href('/create-set')}><li className='navbar_item'>Create Flashcards</li></Link> 
                     <Link to='/view-studysets'><li className='navbar_item'>View Flashcards</li></Link> 
+
                     {
                         props.user ?
                         <Link onClick={signout}><li className='navbar_item'>Sign Out</li></Link> :
