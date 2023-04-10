@@ -20,7 +20,6 @@ router.post("/signin", async(req,res) => {
         const user = await User.findOne(
             {$or: [{ email: req.body.username_email }, { username: req.body.username_email }]}
         )
-        console.log(user)
         if (!user)
             return res.status(401).json({message: "Invalid Email/Username or Password"})
 
