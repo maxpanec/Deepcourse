@@ -14,12 +14,11 @@ import ResetUsername from './Components/ForgetUsername/ResetUsername/ResetUserna
 import FlashcardView from './Components/FlashcardView/FlashcardView';
 import CreateSet from './Components/CreateSet/CreateSet';
 import Error from './Components/Error/Error';
-import ViewStudySets from './Components/ViewStudySets/ViewStudySets';
 
 function App() {
 	const data = localStorage.getItem('data');
 	const user = useMemo(() => {
-		return JSON.parse(data);
+		return JSON.parse(JSON.stringify(data));
 	},[data])
 
 	return (
@@ -38,7 +37,6 @@ function App() {
 							<Route path="/forget-username" exact element={<ForgetUsername/>}/>
 							<Route path="forget-username/reset" exact element={<ResetUsername/>}/>
 							<Route path="flashcard-view/:id" exact element={<FlashcardView/>}/>
-							<Route path="view-studysets" exact element={<ViewStudySets user={user}/>}/>
 							<Route path="/forget-username/reset" exact element={<ResetUsername/>}/>
 							<Route path="/create-set" exact element={<CreateSet/>} />
 							<Route path="*" element={<Error/>}/>
