@@ -6,7 +6,7 @@ import { Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./ResetUsername.css"
 
-const ResetUsername = () => {
+const ResetUsername = (props) => {
     const location = useLocation();
 
     const navigate = useNavigate();
@@ -26,7 +26,9 @@ const ResetUsername = () => {
 		e.preventDefault();
 		try {
             const url = "http://localhost:3001/accounts/forget-username/reset";
-			await axios.post(url, data);
+			const { data: res } = await axios.post(url, data);
+            if(props.user != null)
+                localStorage.setItem("data", JSON.stringify(res.data));
 		    navigate('/');
 		    window.location.reload();
 		} catch (error) {

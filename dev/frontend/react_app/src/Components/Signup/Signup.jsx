@@ -9,23 +9,35 @@ import './Signup.css'
 
 const Signup = () => {
 	const navigate = useNavigate();
-	const [data, setData] = useState({ 
+	const [signupData, setSignupData] = useState({ 
 		email: "",
         username: "",  
 		password: "" 
 	});
+    const [confirmPassword, setConfirmPassword] = useState("");
+
 	const [error, setError] = useState("");
 	
-	const handleChange = (e) => {
-		setData({ ...data, [e.target.name]: e.target.value });
+	const handleSignupDataChange = (e) => {
+		setSignupData({ ...signupData, [e.target.name]: e.target.value });
 	};
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+    };
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+        if(signupData.password !== confirmPassword){
+            setError("Passwords do not match");
+            return;
+        }
+        
 		try {
 			const url = "http://localhost:3001/accounts/signup";
-			const { data: res } = await axios.post(url, data);
-			localStorage.setItem("data", JSON.stringify(res));
+			const { data: res } = await axios.post(url, signupData);
+			localStorage.setItem("data", JSON.stringify(res.data));
 			navigate("/");
 			window.location.reload()
 		} catch (error) {
@@ -55,7 +67,7 @@ const Signup = () => {
                             variant="outlined"
                             required
                             fullWidth
-                            onChange={handleChange}
+                            onChange={handleSignupDataChange}
                             autoFocus
                         />
                     </div>
@@ -67,7 +79,7 @@ const Signup = () => {
                             variant="outlined"
                             required
                             fullWidth
-                            onChange={handleChange}
+                            onChange={handleSignupDataChange}
                         />
                     </div>
                     <div className='signup_field_container'>
@@ -78,7 +90,18 @@ const Signup = () => {
                             variant="outlined"
                             required
                             fullWidth
-                            onChange={handleChange}
+                            onChange={handleSignupDataChange}
+                        />
+                    </div>
+                    <div className='signup_field_container'>
+                        <TextField
+                            name="confirm password"
+                            label="Confirm Password"
+                            type="password"
+                            variant="outlined"
+                            required
+                            fullWidth
+                            onChange={handleConfirmPasswordChange}
                         />
                     </div>
                 </ThemeProvider>

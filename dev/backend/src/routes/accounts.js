@@ -141,8 +141,12 @@ router.post("/forget-username/reset", async(req, res) => {
                 
         user.username = req.body.username
         await user.save();
-    
-        res.status(201).json({message: "User username updated"})
+        
+        const userData = {
+            username: user.username
+        }
+
+        res.status(201).json({message: "User username updated", data: userData})
     }
     catch (error) {
         res.status(500).json({message: "Internal Server Error"})
@@ -177,9 +181,13 @@ router.post("/signup", async (req, res) => {
         const salt = await bcrypt.genSalt(Number(10))
         const hashPassword = await bcrypt.hash(req.body.password, salt)
 
-        await new User({...req.body, password: hashPassword}).save()
-        res.status(201).json()
+        const user = await new User({...req.body, password: hashPassword}).save()
 
+        const userData = {
+            username: user.username
+        }
+        
+        res.status(201).json({data: userData})
     } catch (error) {
         res.status(500).json({message: "Internal Server Error"})
     }

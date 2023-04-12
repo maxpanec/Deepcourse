@@ -7,6 +7,7 @@ import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 import About from './Components/About/About'
 import Footer from './Components/Footer/Footer';
+import NotSignedIn from './Components/NotSignedIn/NotSignedIn';
 import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
 import ResetPassword from './Components/ForgetPassword/ResetPassword/ResetPassword';
 import ForgetUsername from './Components/ForgetUsername/ForgetUsername';
@@ -30,6 +31,7 @@ function App() {
 						<Routes>
 							<Route path="/" exact element={<Homepage/>}/>
 							<Route path="/signin" exact element={<Signin/>}/>
+							<Route path="/needtosignin" exact element={<NotSignedIn />}/>
 							<Route path="/signup" exact element={<Signup/>}/>
 							<Route path="/about" exact element={<About/>}/>
 							{/*<Route path="/contact" exact element={<Contact/>}/>*/}
@@ -37,10 +39,10 @@ function App() {
 							<Route path="/forget-password/reset" exact element={<ResetPassword/>}/>
 							<Route path="/forget-username" exact element={<ForgetUsername/>}/>
 							<Route path="forget-username/reset" exact element={<ResetUsername/>}/>
-							<Route path="flashcard-view/:id" exact element={<FlashcardView/>}/>
+							<Route path="flashcard-view/:id" exact element={<FlashcardView user={user}/>}/>
 							<Route path="view-studysets" exact element={<ViewStudySets user={user}/>}/>
-							<Route path="/forget-username/reset" exact element={<ResetUsername/>}/>
-							<Route path="/create-set" exact element={<CreateSet/>} />
+							<Route path="/forget-username/reset" exact element={<ResetUsername user={user}/>}/>
+							<Route path="/create-set" exact element={<CreateSet user={user}/>} />
 							<Route path="*" element={<Error/>}/>
 						</Routes>
 					</div>
