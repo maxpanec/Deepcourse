@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from "react-router-dom";
 import axios from 'axios';
 import './ViewStudySets.css';
 
@@ -9,6 +9,8 @@ const ViewStudySets = (props) => {
   const [studySets, setStudySets] = useState([]);
 
   useEffect(() => {
+    if(props.user === null)
+      return;
     const fetchStudySets = async () => {
       try {
         const response = await axios.get('http://localhost:3001/flashcards/flashcard-sets-info', {
@@ -20,7 +22,7 @@ const ViewStudySets = (props) => {
       }
     };
     fetchStudySets();
-  }, [props.user.username]);
+  }, [props.user]);
 
   const handleStudySetClick = (setId) => {
     // Handle the study set click event, e.g. navigate to study set page
@@ -33,7 +35,10 @@ const ViewStudySets = (props) => {
     console.log('Study Set removed with id:', setId);
   };
 
-  return (
+  if(props.user === null) {
+    return <Navigate replace to="/needtosignin"/>
+  }
+  else return (
     <div className="study-sets-container">
       <h1 className="study-sets-title">Study Sets</h1>
       <div className="study-sets-grid">

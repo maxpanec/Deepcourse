@@ -45,7 +45,7 @@ const CreateSet = () => {
     }, []);
 
     if(loggedInUser === null) {
-        return <Navigate replace to="/signin"/>
+        return <Navigate replace to="/needtosignin"/>
     }
     else{
         const info = JSON.parse(loggedInUser);

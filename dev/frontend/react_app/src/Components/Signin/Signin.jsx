@@ -1,14 +1,13 @@
 import React from 'react';
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './Signin.css'
 
 
 const Signin = () => {
-    const loggedin = localStorage.getItem('data');
 
 	const navigate = useNavigate();
 	const [data, setData] = useState({ 
@@ -42,59 +41,54 @@ const Signin = () => {
 
     const darkTheme = createTheme({ palette: {mode: 'dark'} });
 
-    if(loggedin === null){
-        return (
-            <div className="signin_container">
-                <h1 className="header" >Login to Account</h1>
-                <form onSubmit={handleSubmit}>
-                    <ThemeProvider theme={darkTheme}>
-                        <div className='signin_field_container'>
-                            <TextField
-                                name="username_email"
-                                label="Email or Username"
-                                type="text"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                onChange={handleChange}
-                                autoFocus
-                            />
-                            <Link to='/forget-username' className='forgets'>Forget Username?</Link>
-                        </div>
-                        
-                        <div className='signin_field_container'>
-                            <TextField
-                                name="password"
-                                label="Password"
-                                type="password"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                onChange={handleChange}
-                            />
-                            <Link to='/forget-password' className='forgets'>Forget Password?</Link>
-                        </div>
-                    </ThemeProvider>
-                    {error && <div className="error_msg">{error}</div>}
-                    <Button type='submit' variant="contained" color="primary" fullWidth>Sign In</Button>
-                </form>
-                <h3 className='question' style={{}}>Don't have an account?</h3>
-                <div className='signup'>
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        size="small"
-                        component={Link}
-                        to='/signup'>
-                        Sign Up
-                    </Button>
-                </div>
+    return (
+        <div className="signin_container">
+            <h1 className="header" >Login to Account</h1>
+            <form onSubmit={handleSubmit}>
+                <ThemeProvider theme={darkTheme}>
+                    <div className='signin_field_container'>
+                        <TextField
+                            name="username_email"
+                            label="Email or Username"
+                            type="text"
+                            variant="outlined"
+                            required
+                            fullWidth
+                            onChange={handleChange}
+                            autoFocus
+                        />
+                        <Link to='/forget-username' className='forgets'>Forget Username?</Link>
+                    </div>
+                    
+                    <div className='signin_field_container'>
+                        <TextField
+                            name="password"
+                            label="Password"
+                            type="password"
+                            variant="outlined"
+                            required
+                            fullWidth
+                            onChange={handleChange}
+                        />
+                        <Link to='/forget-password' className='forgets'>Forget Password?</Link>
+                    </div>
+                </ThemeProvider>
+                {error && <div className="error_msg">{error}</div>}
+                <Button type='submit' variant="contained" color="primary" fullWidth>Sign In</Button>
+            </form>
+            <h3 className='question' style={{}}>Don't have an account?</h3>
+            <div className='signup'>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    component={Link}
+                    to='/signup'>
+                    Sign Up
+                </Button>
             </div>
-        );
-    }
-    else{
-        return <Navigate replace to="/"/>
-    }
+        </div>
+    );
 };
 
 export default Signin;
