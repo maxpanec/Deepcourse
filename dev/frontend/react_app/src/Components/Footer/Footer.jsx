@@ -9,7 +9,9 @@ const Footer = () => {
         <footer className='footer'>
             <div className='links'>
                 <Link to="/about" className='link about'><b>About Us</b></Link>
-                <Link to="/contact" className='link contact'><b>Contact Us</b></Link>
+                
+                {/* Unused contact link */}
+                {/* <Link to="/contact" className='link contact'><b>Contact Us</b></Link> */}
             </div>
             <hr className='line'/>
             <div>
