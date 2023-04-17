@@ -7,7 +7,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import "./Forget_username.css"
 
+//Forget username page
 const ForgetUsername = () => {
+    //get user data && initialization
     const navigate = useNavigate();
     const loggedin = localStorage.getItem('data');
 
@@ -16,13 +18,22 @@ const ForgetUsername = () => {
 	});
 	const [error, setError] = useState("");
 
+    /**
+     * Change target variable based on e
+     * @param {*} e  contains item name and item value
+     */
     const handleChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
 	};
 
+    /**
+     * Connects to back end and guide to next page if successs
+     * @param {*} e event parameter
+     */
     const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+            //connect to backend api and pass data if no error
 			const url = "http://localhost:3001/accounts/forget-username";
 			await axios.post(url, data);
 			navigate(
@@ -30,7 +41,9 @@ const ForgetUsername = () => {
                 {state: data}
             );
 			window.location.reload();
-		} catch (error) {
+		} 
+        //error checks
+        catch (error) {
 			if (
 				error.response &&
 				error.response.status >= 400 &&
@@ -41,9 +54,12 @@ const ForgetUsername = () => {
 		}
 	};
 
+    //theme
     const darkTheme = createTheme({ palette: {mode: 'dark'} });
 
+    //checks user logged in or not, if no
     if(loggedin === null){
+        //HTML code
         return (
             <div className="forget_username_container">
                 <h1 className="header">Enter Email</h1>
@@ -79,6 +95,7 @@ const ForgetUsername = () => {
             </div>
         );
     }
+    //if yes, back to home page
     else{
         return <Navigate replace to="/"/>
     }
