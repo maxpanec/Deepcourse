@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Navigate } from "react-router-dom";
+import { Button } from '@mui/material';
 import axios from 'axios';
 import './ViewStudySets.css';
 
@@ -24,15 +25,22 @@ const ViewStudySets = (props) => {
     fetchStudySets();
   }, [props.user]);
 
-  const handleStudySetClick = (setId) => {
-    // Handle the study set click event, e.g. navigate to study set page
-    console.log('Study Set clicked with id:', setId);
+  const handleViewStudySet = (setId) => {
+    // Handle the study set view event, e.g. navigate to study set page
     navigate(`/flashcard-view/${setId}`); // Use navigate function to navigate to the desired route
+  };
+
+  const handleQuizStudySet = (setId) => {
+    // Handle the study set quiz event, e.g. prompt for which type of quiz
+  };
+
+  const handleScoresStudySet = (setId) => {
+    // Handle the study set scores event, e.g. navigate to study set score page
+    //navigate(`/scores/${setId}`); // Use navigate function to navigate to the desired route
   };
 
   const handleRemoveStudySet = (setId) => {
     // Handle the study set removal event, e.g. send a request to remove study set
-    console.log('Study Set removed with id:', setId);
   };
 
   if(props.user === null) {
@@ -43,16 +51,18 @@ const ViewStudySets = (props) => {
       <h1 className="study-sets-title">Study Sets</h1>
       <div className="study-sets-grid">
         {studySets.map((set) => (
-          <div key={set.id} className="study-set-box" onClick={() => handleStudySetClick(set.id)}>
+          <div key={set.id} className="study-set-box">
             <h3 className="study-set-name">{set.name}</h3>
-            <p className="study-set-category">Category: {set.category}</p>
-            <p className="study-set-description">Description: {set.description}</p>
-            <button
-              className="remove-study-set-button"
-              onClick={() => handleRemoveStudySet(set.id)}
-            >
-              Remove
-            </button>
+            <div className="study-sets-button-grid">
+              <div className="study-sets-button-row">
+                <Button variant="text" onClick={() => handleViewStudySet(set.id)}>View</Button>
+                <Button variant="text" onClick={() => handleQuizStudySet(set.id)}>Quiz</Button>
+              </div>
+              <div className="study-sets-button-row">
+                <Button variant="text" onClick={() => handleScoresStudySet(set.id)}>Scores</Button>
+                <Button variant="text" onClick={() => handleRemoveStudySet(set.id)}>Delete</Button>
+              </div>
+            </div>
           </div>
         ))}
       </div>

@@ -15,7 +15,7 @@ const FlashcardView = (props) => {
   const [position, setPosition] = useState(0);
   const [frontCardText, setFrontCardText] = useState("");
   const [backCardText, setBackCardText] = useState("");
-  const [isTableFormat, setIsTableFormat] = useState(true)
+  const [isTableFormat, setIsTableFormat] = useState(false)
 
   useEffect(() => {
     const getRes = async () => {
