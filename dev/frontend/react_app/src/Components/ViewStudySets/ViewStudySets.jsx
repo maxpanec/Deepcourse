@@ -45,8 +45,8 @@ const ViewStudySets = (props) => {
         {studySets.map((set) => (
           <div key={set.id} className="study-set-box" onClick={() => handleStudySetClick(set.id)}>
             <h3 className="study-set-name">{set.name}</h3>
-            <p className="study-set-category">Category: {set.category}</p>
-            <p className="study-set-description">Description: {set.description}</p>
+            {/* <p className="study-set-category">Category: {set.category}</p>
+            <p className="study-set-description">Description: {set.description}</p> */}
             <button
               className="remove-study-set-button"
               onClick={() => handleRemoveStudySet(set.id)}
