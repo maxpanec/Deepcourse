@@ -141,8 +141,8 @@ const CreateSet = () => {
                     setName: title,
                     cards: cards
                 })
-                //redirect to home page
-                navigate("/");
+                //redirect to view sets page
+                navigate("/view-studysets");
             }
             //error catching
             catch(error) {
@@ -155,7 +155,7 @@ const CreateSet = () => {
                 }
             }
         }
-    
+
         //HTML code comes here
         return (
             <div className='center-div'>

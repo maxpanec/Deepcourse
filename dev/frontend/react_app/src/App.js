@@ -16,6 +16,7 @@ import FlashcardView from './Components/FlashcardView/FlashcardView';
 import CreateSet from './Components/CreateSet/CreateSet';
 import Error from './Components/Error/Error';
 import ViewStudySets from './Components/ViewStudySets/ViewStudySets';
+import Temp from './Components/Temp/Temp'
 
 function App() {
 	const data = localStorage.getItem('data');
@@ -43,6 +44,7 @@ function App() {
 							<Route path="view-studysets" exact element={<ViewStudySets user={user}/>}/>
 							<Route path="/forget-username/reset" exact element={<ResetUsername user={user}/>}/>
 							<Route path="/create-set" exact element={<CreateSet user={user}/>} />
+							<Route path="/temp" exact element={<Temp />}/>
 							<Route path="*" element={<Error/>}/>
 						</Routes>
 					</div>
