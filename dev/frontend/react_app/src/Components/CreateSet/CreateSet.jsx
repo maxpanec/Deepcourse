@@ -131,11 +131,6 @@ const CreateSet = () => {
             try {
                 //push to database (use backend api)
                 const url = "http://localhost:3001/flashcards/flashcard-set"
-                console.log({
-                    username: username,
-                    setName: title,
-                    cards: cards
-                });
                 await axios.post(url, {
                     username: username,
                     setName: title,
