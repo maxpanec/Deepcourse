@@ -36,11 +36,19 @@ const ViewStudySets = (props) => {
 
   const handleScoresStudySet = (setId) => {
     // Handle the study set scores event, e.g. navigate to study set score page
-    //navigate(`/scores/${setId}`); // Use navigate function to navigate to the desired route
+    navigate(`/scores/${setId}`); // Use navigate function to navigate to the desired route
   };
 
-  const handleRemoveStudySet = (setId) => {
+  const handleRemoveStudySet = async (setId) => {
     // Handle the study set removal event, e.g. send a request to remove study set
+    try{
+      await axios.delete('http://localhost:3001/flashcards/flashcard-set', {
+        params: { username: props.user.username, id: setId },
+      })
+      setStudySets(studySets.filter(set => set.id !== setId))
+    } catch(error){
+      console.log("error")
+    }
   };
 
   if(props.user === null) {

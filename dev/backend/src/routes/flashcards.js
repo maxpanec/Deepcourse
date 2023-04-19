@@ -163,6 +163,38 @@ router.get("/flashcard-set", async(req,res) => {
     }
 })
 
+/*
+    Expected paramters
+    //the username of the user who owns this set
+    username
+    //the id of the flashcard to be deleted
+    id
+*/
+router.delete("/flashcard-set", async(req,res) => {
+    try {
+        const user = await User.findOne({username: req.query.username})
+        if (!user)
+            return res.status(401).json({message: "Invalid Username"})
+
+        const id = req.query.id
+        const set = await Flashcard.findById(id)
+        if (!set)
+            return res.status(401).json({message: "Invalid ID"})
+
+        console.log(user)
+        await user.flashcardIDs.pull(id)
+
+        await set.delete()
+        await user.save()
+        console.log(user)
+        console.log(set)
+
+        res.status(200).json()
+    } catch (error) {
+        res.status(500).json({message: "Internal Server Error"})
+    }
+})
+
 // router.delete("/sets", async(req,res) => {
 //     try {
 //         const user = await User.findOne({username: req.body.username})
