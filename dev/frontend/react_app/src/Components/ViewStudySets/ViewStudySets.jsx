@@ -147,7 +147,7 @@ const ViewStudySets = (props) => {
                       </div>
 
                       <div className="btns back-btn">
-                        <Button variant="contained" color="primary" fullWidth onClick={(e) => handleClose(e)}>
+                        <Button variant="contained" style={{backgroundColor: "#21b6ae"}} fullWidth onClick={(e) => handleClose(e)}>
                           Back
                         </Button>
                       </div>
