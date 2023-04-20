@@ -79,12 +79,14 @@ router.get("/scores", async(req,res) => {
         //array of objects with keys question, choices, and answer
         //each element represents a quiz question/answer
         //question is the question
+        //answerInQuestion is the thing being determined true or false
         //choices is an array of the different choices the user has for the question
         //answer is the correct choice
         //the amount of elements in data will be 0 or more
         "data": [
             {
                 "question": String,
+                "answerInQuestion": String, (Only Present For True of False)
                 "choices": [String],
                 "answer": String
             }
@@ -154,11 +156,11 @@ function getTrueOrFalseData(set){
 
     for(let i = 0; i < set.cards.length; i++){
         const tof = randomTrueOrFalse()
-        const questionPart = tof ? set.cards[i].answer : getRandomDifferentAnswer(set.cards, i)
-        const question = set.cards[i].question + " : " + questionPart
+        const answerInQuestion = tof ? set.cards[i].answer : getRandomDifferentAnswer(set.cards, i)
         const answer = tof ? "True" : "False"
         retArr.push({
-            question: question,
+            question: set.cards[i].question,
+            answerInQuestion: answerInQuestion,
             choices: ["True", "False"],
             answer: answer
         })
