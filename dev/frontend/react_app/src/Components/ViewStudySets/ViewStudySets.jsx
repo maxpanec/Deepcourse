@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Navigate } from "react-router-dom";
 import { Button, Radio, RadioGroup, FormControlLabel, FormControl } from '@mui/material';
-import { withStyles } from '@mui/styles';
 import { lightBlue } from '@mui/material/colors';
 import axios from 'axios';
 import Popup from "reactjs-popup"
@@ -87,15 +86,18 @@ const ViewStudySets = (props) => {
     setQuizSetID("");
   }
 
-  const LightBlueRadio = withStyles({
-    root: {
-      color: lightBlue[400],
-      "&$checked": {
-        color: lightBlue[600]
-      }
-    },
-    checked: {}
-  })((props) => <Radio color="default" {...props} />);
+  //JSX Element for Radio Button with Light Blue Selection
+  const LightBlueRadio = ((props) => 
+    <Radio 
+      {...props} 
+      sx={{
+        color: lightBlue[400],
+        '&.Mui-checked': {
+        color: lightBlue[600],
+        },
+      }}
+    />
+  );
 
   //navigate to request sign in page if not signed in
   if(props.user === null) {
