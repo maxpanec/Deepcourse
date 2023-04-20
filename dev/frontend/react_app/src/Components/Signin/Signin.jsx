@@ -6,9 +6,9 @@ import { Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './Signin.css'
 
-
+//sign in page
 const Signin = () => {
-
+    //initialization
 	const navigate = useNavigate();
 	const [data, setData] = useState({ 
 		username_email: "", 
@@ -16,19 +16,31 @@ const Signin = () => {
 	});
 	const [error, setError] = useState("");
 	
+    /**
+     * change target textfield by name
+     * @param {*} e event parameter
+     */
 	const handleChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
 	};
 
+    /**
+     * check user input to backend api and login if success
+     * @param {*} e event parameter
+     */
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+            //connect to backend api
 			const url = "http://localhost:3001/accounts/signin";
 			const { data: res } = await axios.post(url, data);
+            //store user information (login)
 			localStorage.setItem("data", JSON.stringify(res.data));
 			navigate("/");
 			window.location.reload()
-		} catch (error) {
+		} 
+        //Error catching
+        catch (error) {
 			if (
 				error.response &&
 				error.response.status >= 400 &&
@@ -41,6 +53,7 @@ const Signin = () => {
 
     const darkTheme = createTheme({ palette: {mode: 'dark'} });
 
+    //HTML code
     return (
         <div className="signin_container">
             <h1 className="header" >Login to Account</h1>

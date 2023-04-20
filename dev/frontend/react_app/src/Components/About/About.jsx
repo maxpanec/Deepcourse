@@ -2,6 +2,7 @@ import React from "react";
 
 import "./About.css"
 
+//About us page
 const About = () => {
     return(
         <b>

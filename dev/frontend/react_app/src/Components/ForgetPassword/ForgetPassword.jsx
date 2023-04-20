@@ -6,9 +6,12 @@ import { Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './Forget_password.css'
 
+//Forget password page
 const ForgetPassword = () => {
+    //gets user logged in or not
     const loggedin = localStorage.getItem('data');
 
+    //initialization
     const navigate = useNavigate();
 	const [data, setData] = useState({ 
 		email: "", 
@@ -16,21 +19,33 @@ const ForgetPassword = () => {
 	});
 	const [error, setError] = useState("");
 
+    /**
+     * changing target textfield information
+     * @param {*} e event parameter
+     */
     const handleChange = (e) => {
 		setData({ ...data, [e.target.name]: e.target.value });
 	};
 
+    /**
+     * check user existance via backend
+     * @param {*} e event parameters
+     */
     const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+            //connect to backend api
 			const url = "http://localhost:3001/accounts/forget-password";
 			await axios.post(url, data);
 			navigate(
                 '/forget-password/reset',
+                //pass data
                 {state: data}
             );
 			window.location.reload();
-		} catch (error) {
+		} 
+        //error catching
+        catch (error) {
 			if (
 				error.response &&
 				error.response.status >= 400 &&
@@ -43,7 +58,9 @@ const ForgetPassword = () => {
 
     const darkTheme = createTheme({ palette: {mode: 'dark'} });
 
+    //if not logged in
     if(loggedin === null){
+        //HTML code
         return (
             <div className="forget_password_container">
                 <h1 className="header">Enter Username and Email</h1>
@@ -92,6 +109,7 @@ const ForgetPassword = () => {
             </div>
         );
     }
+    //if logged in, redirect to home page.
     else{
         return <Navigate replace to="/"/>
     }
