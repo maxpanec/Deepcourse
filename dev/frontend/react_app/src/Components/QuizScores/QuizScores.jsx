@@ -31,6 +31,10 @@ const QuizScores = (props) => {
         return `${barHeight * 400}px`; // set the height to a fixed value or adjust dynamically
     };
 
+    const formatDate = (dateString) => {
+        return dateString.substring(0, 19).replace('T', ' ');
+    };
+
     return (
         <div className="quiz-scores-container">
             <h2 className="quiz-scores-heading">Quiz Scores</h2>
@@ -41,7 +45,7 @@ const QuizScores = (props) => {
                         style={{ height: getBarHeight(quiz.score) }}
                         key={quiz.date}
                     >
-                        <div className="quiz-scores-date">{quiz.date}</div>
+                        <div className="quiz-scores-date">{formatDate(quiz.date)}</div>
                         <div className="quiz-scores-score">{quiz.score}</div>
                     </div>
                 ))}
