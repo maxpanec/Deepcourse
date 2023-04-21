@@ -32,7 +32,10 @@ const QuizScores = (props) => {
     };
 
     const formatDate = (dateString) => {
-        return dateString.substring(0, 19).replace('T', ' ');
+        const date = new Date(dateString);
+        const formattedDate = date.toLocaleDateString();
+        const formattedTime = date.toLocaleTimeString();
+        return `${formattedDate}<br>${formattedTime}`;
     };
 
     return (
@@ -45,8 +48,9 @@ const QuizScores = (props) => {
                         style={{ height: getBarHeight(quiz.score) }}
                         key={quiz.date}
                     >
-                        <div className="quiz-scores-date">{formatDate(quiz.date)}</div>
                         <div className="quiz-scores-score">{quiz.score}</div>
+                        <div className="quiz-scores-date" dangerouslySetInnerHTML={{ __html: formatDate(quiz.date) }} />
+
                     </div>
                 ))}
             </div>
