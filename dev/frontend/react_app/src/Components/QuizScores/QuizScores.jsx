@@ -1,22 +1,35 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import './QuizScores.css';
+import axios from 'axios';
 
-function QuizScores() {
+const QuizScores = (props) => {
+    const { id } = useParams();
     const [scores, setScores] = useState([]);
 
     useEffect(() => {
-        // Sample data of quiz scores with corresponding dates
-        const sampleScores = [
-            { score: 80, date: '2022-04-10' },
-            { score: 90, date: '2022-04-15' },
-            { score: 70, date: '2022-04-20' },
-            { score: 95, date: '2022-04-25' },
-            { score: 100, date: '2022-04-27' },
-            { score: 70, date: '2022-04-28' },
-        ];
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/quiz/scores', {
+                    params: { id: id }
+                },
+                );
+                setScores(response.data.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchData();
+    }, [id]);
 
-        setScores(sampleScores);
-    }, []);
+    const getBarHeight = (score) => {
+        //const minScore = Math.min(...scores.map((quiz) => quiz.score));
+        //const maxScore = Math.max(...scores.map((quiz) => quiz.score));
+        //const barHeight = (score - minScore) / (maxScore - minScore) * 100;
+        //return `${barHeight}%`;
+        const barHeight = score / 100; // adjust this calculation as needed
+        return `${barHeight * 400}px`; // set the height to a fixed value or adjust dynamically
+    };
 
     return (
         <div className="quiz-scores-container">
@@ -25,7 +38,7 @@ function QuizScores() {
                 {scores.map((quiz) => (
                     <div
                         className="quiz-scores-bar"
-                        style={{ height: `${quiz.score}%` }}
+                        style={{ height: getBarHeight(quiz.score) }}
                         key={quiz.date}
                     >
                         <div className="quiz-scores-date">{quiz.date}</div>
