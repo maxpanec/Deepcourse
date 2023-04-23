@@ -51,13 +51,16 @@ const ViewStudySets = (props) => {
 
   const handleRemoveStudySet = async (setId) => {
     // Handle the study set removal event, e.g. send a request to remove study set
-    try {
-      await axios.delete('http://localhost:3001/flashcards/flashcard-set', {
-        params: { username: props.user.username, id: setId },
-      })
-      setStudySets(studySets.filter(set => set.id !== setId))
-    } catch (error) {
-      console.log("error")
+    const resp = window.confirm("Do you want to delete this set?");
+    if(resp){
+      try {
+        await axios.delete('http://localhost:3001/flashcards/flashcard-set', {
+          params: { username: props.user.username, id: setId },
+        })
+        setStudySets(studySets.filter(set => set.id !== setId))
+      } catch (error) {
+        console.log("error")
+      }
     }
   };
 

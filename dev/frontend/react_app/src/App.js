@@ -17,7 +17,6 @@ import CreateSet from './Components/CreateSet/CreateSet';
 import Error from './Components/Error/Error';
 import ViewStudySets from './Components/ViewStudySets/ViewStudySets';
 import QuizScores from './Components/QuizScores/QuizScores';
-// import Temp from './Components/Temp/Temp'
 
 function App() {
 	const data = localStorage.getItem('data');
@@ -36,7 +35,6 @@ function App() {
 						<Route path="/needtosignin" exact element={<NotSignedIn />} />
 						<Route path="/signup" exact element={<Signup />} />
 						<Route path="/about" exact element={<About />} />
-						{/*<Route path="/contact" exact element={<Contact/>}/>*/}
 						<Route path="/forget-password" exact element={<ForgetPassword />} />
 						<Route path="/forget-password/reset" exact element={<ResetPassword />} />
 						<Route path="/forget-username" exact element={<ForgetUsername />} />
@@ -47,7 +45,6 @@ function App() {
 						<Route path="/create-set" exact element={<CreateSet user={user} />} />
 						<Route path="/scores/:id" exact element={<QuizScores user={user} />} />
 						{/* <Route path="/scores" exact element={<QuizScores />} />*/}
-						{/* <Route path="/temp" exact element={<Temp />}/> */}
 						<Route path="*" element={<Error />} />
 					</Routes>
 				</div>
