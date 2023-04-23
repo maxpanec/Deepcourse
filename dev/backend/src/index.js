@@ -5,7 +5,7 @@ mongoose.set('strictQuery', false);
 
 const accountRoutes = require('./routes/accounts')
 const flashcardRoutes = require('./routes/flashcards')
-
+const quizRoutes = require('./routes/quiz')
 
 const app = express();
 
@@ -13,6 +13,8 @@ app.use(express.json());
 app.use(cors());
 app.use("/accounts", accountRoutes)
 app.use("/flashcards", flashcardRoutes)
+app.use("/quiz", quizRoutes)
+
 
 
 try{
