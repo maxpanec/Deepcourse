@@ -6,7 +6,9 @@ import { Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./ResetPassword.css"
 
+//reset password page
 const ResetPassword = () => {
+    //initialization
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -21,6 +23,10 @@ const ResetPassword = () => {
 
     const darkTheme = createTheme({ palette: {mode: 'dark'} });
 
+    /**
+     * changing target textfield
+     * @param {*} e event parameter
+     */
     const handleChange = (e) => {
         setData({ ...data, 
             email: location.state.email,
@@ -28,6 +34,10 @@ const ResetPassword = () => {
             [e.target.name]: e.target.value});
 	};
 
+    /**
+     * connects to backend and update the password if no error
+     * @param {*} e event parameter
+     */
     const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -35,7 +45,9 @@ const ResetPassword = () => {
 			await axios.post(url, data);
 		    navigate('/');
 		    window.location.reload();
-		} catch (error) {
+		} 
+        //error catching
+        catch (error) {
 			if (
 				error.response &&
 				error.response.status >= 400 &&
@@ -46,10 +58,13 @@ const ResetPassword = () => {
 		}
 	};
 
+    //if not user information from previous page, redirect to home page
     if(location.state === null){
         return <Navigate replace to="/"/>
     }
+    //if user information exists
     else{
+        //HTML code
         return (
             <div className="reset_password_container">
                 <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em"}}>Reset Password</h1>

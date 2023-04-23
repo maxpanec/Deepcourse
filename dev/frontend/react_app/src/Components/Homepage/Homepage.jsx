@@ -1,6 +1,8 @@
 import React from 'react';
 
+//home page
 const HomePage = () => {
+  //HTML Code
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px' }}>
       <div style={{ textAlign: 'center' }}>
