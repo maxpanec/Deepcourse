@@ -16,6 +16,7 @@ import FlashcardView from './Components/FlashcardView/FlashcardView';
 import CreateSet from './Components/CreateSet/CreateSet';
 import Error from './Components/Error/Error';
 import ViewStudySets from './Components/ViewStudySets/ViewStudySets';
+import Quiz from './Components/Quiz/Quiz'
 import QuizScores from './Components/QuizScores/QuizScores';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
 						<Route path="view-studysets" exact element={<ViewStudySets user={user} />} />
 						<Route path="/forget-username/reset" exact element={<ResetUsername user={user} />} />
 						<Route path="/create-set" exact element={<CreateSet user={user} />} />
+						<Route path="/quiz" exact element={<Quiz user={user}/>} />
 						<Route path="/scores/:id" exact element={<QuizScores user={user} />} />
 						{/* <Route path="/scores" exact element={<QuizScores />} />*/}
 						<Route path="*" element={<Error />} />
