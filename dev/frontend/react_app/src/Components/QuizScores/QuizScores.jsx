@@ -23,12 +23,6 @@ const QuizScores = (props) => {
     }, [id]);
 
     const getBarHeight = (score) => {
-        //const minScore = Math.min(...scores.map((quiz) => quiz.score));
-        //const maxScore = Math.max(...scores.map((quiz) => quiz.score));
-        //const barHeight = (score - minScore) / (maxScore - minScore) * 100;
-        //return `${barHeight}%`;
-        //const barHeight = score / 100; // adjust this calculation as needed
-        //return `${barHeight * 400}px`; // set the height to a fixed value or adjust dynamically
         if (score === 0) {
             return '80px';
         } else {
