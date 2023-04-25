@@ -27,15 +27,21 @@ const QuizScores = (props) => {
         //const maxScore = Math.max(...scores.map((quiz) => quiz.score));
         //const barHeight = (score - minScore) / (maxScore - minScore) * 100;
         //return `${barHeight}%`;
-        const barHeight = score / 100; // adjust this calculation as needed
-        return `${barHeight * 400}px`; // set the height to a fixed value or adjust dynamically
+        //const barHeight = score / 100; // adjust this calculation as needed
+        //return `${barHeight * 400}px`; // set the height to a fixed value or adjust dynamically
+        if (score === 0) {
+            return '80px';
+        } else {
+            const barHeight = score / 100; // adjust this calculation as needed
+            return `${barHeight * 400}px`; //
+        }
     };
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        const formattedDate = date.toLocaleDateString();
-        const formattedTime = date.toLocaleTimeString();
-        return `${formattedDate}<br>${formattedTime}`;
+        const formattedDate = `${date.toLocaleDateString()}`
+        const formattedTime = `${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+        return `${formattedDate}\n${formattedTime}`;
     };
 
     return (
@@ -43,15 +49,11 @@ const QuizScores = (props) => {
             <h2 className="quiz-scores-heading">Quiz Scores</h2>
             <div className="quiz-scores-graph">
                 {scores.map((quiz) => (
-                    <div
-                        className="quiz-scores-bar"
-                        style={{ height: getBarHeight(quiz.score) }}
-                        key={quiz.date}
-                    >
+                    <div className="quiz-scores-bar" style={{ height: getBarHeight(quiz.score) }} key={quiz.date}>
                         <div className="quiz-scores-score">{quiz.score}</div>
-                        <div className="quiz-scores-date" dangerouslySetInnerHTML={{ __html: formatDate(quiz.date) }} />
-
+                        <div className="quiz-scores-date">{formatDate(quiz.date)}</div>
                     </div>
+
                 ))}
             </div>
         </div>
