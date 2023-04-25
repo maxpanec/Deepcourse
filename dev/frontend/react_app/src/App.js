@@ -44,7 +44,7 @@ function App() {
 						<Route path="view-studysets" exact element={<ViewStudySets user={user} />} />
 						<Route path="/forget-username/reset" exact element={<ResetUsername user={user} />} />
 						<Route path="/create-set" exact element={<CreateSet user={user} />} />
-						<Route path="/quiz" exact element={<Quiz user={user}/>} />
+						<Route path="/view-quiz/:id" exact element={<Quiz user={user}/>} />
 						<Route path="/scores/:id" exact element={<QuizScores user={user} />} />
 						{/* <Route path="/scores" exact element={<QuizScores />} />*/}
 						<Route path="*" element={<Error />} />
