@@ -181,13 +181,10 @@ router.delete("/flashcard-set", async(req,res) => {
         if (!set)
             return res.status(401).json({message: "Invalid ID"})
 
-        console.log(user)
         await user.flashcardIDs.pull(id)
 
         await set.delete()
         await user.save()
-        console.log(user)
-        console.log(set)
 
         res.status(200).json()
     } catch (error) {
