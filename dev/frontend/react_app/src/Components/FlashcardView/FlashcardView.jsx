@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Button, Stack } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import axios from "axios"
 import "./FlashcardView.css";
 

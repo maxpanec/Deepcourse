@@ -32,6 +32,7 @@ const Navbar = (props)  => {
                 <ul>
                     <Link to='/'><li className='navbar_item'>Home</li></Link>
                     <Link to='/create-set'><li className='navbar_item'>Create Flashcards</li></Link> 
+
                     <Link to='/view-studysets'><li className='navbar_item'>View Flashcards</li></Link> 
                     {/* user detection -- signin and signout display in different situation */}
                     {
