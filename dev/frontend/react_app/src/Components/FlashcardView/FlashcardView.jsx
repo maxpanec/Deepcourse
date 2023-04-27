@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Button, Stack } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -15,7 +15,9 @@ const FlashcardView = (props) => {
   const [position, setPosition] = useState(0);
   const [frontCardText, setFrontCardText] = useState("");
   const [backCardText, setBackCardText] = useState("");
-  const [isTableFormat, setIsTableFormat] = useState(false)
+  const [isTableFormat, setIsTableFormat] = useState(false);
+
+  const nav = useNavigate();
 
   useEffect(() => {
     const getRes = async () => {
@@ -62,6 +64,10 @@ const FlashcardView = (props) => {
       setPosition(position-1);
   }
 
+  const handleEdit = () => {
+    nav("edit");
+  }
+
   return(
     <div className="outer">
       {titleData}
@@ -70,6 +76,7 @@ const FlashcardView = (props) => {
       <Stack direction="row" spacing={2} className="button-container">
         <Button variant="contained" color="primary" onClick={() => {setIsTableFormat(true)}}>Table</Button>
         <Button variant="contained" color="primary" onClick={() => {setIsTableFormat(false)}}>Deck</Button>
+        <Button variant="contained" color="primary" onClick={() => handleEdit()}>Edit</Button>
       </Stack>}
 
       {isTableFormat &&

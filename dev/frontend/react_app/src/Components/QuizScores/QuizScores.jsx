@@ -13,7 +13,7 @@ const QuizScores = (props) => {
                 const response = await axios.get('http://localhost:3001/quiz/scores', {
                     params: { id: id }
                 },
-                );
+            );
                 setScores(response.data.data);
             } catch (error) {
                 console.error(error);
