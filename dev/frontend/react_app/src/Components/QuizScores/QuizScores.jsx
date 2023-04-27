@@ -44,7 +44,7 @@ const QuizScores = (props) => {
             <div className="quiz-scores-graph">
                 {scores.map((quiz) => (
                     <div className="quiz-scores-bar" style={{ height: getBarHeight(quiz.score) }} key={quiz.date}>
-                        <div className="quiz-scores-score">{quiz.score}</div>
+                        <div className="quiz-scores-score">{(quiz.score).toFixed(2)}</div>
                         <div className="quiz-scores-date">{formatDate(quiz.date)}</div>
                     </div>
 
