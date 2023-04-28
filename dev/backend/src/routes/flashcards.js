@@ -48,6 +48,21 @@ router.post("/flashcard-set", async(req,res) => {
     }
 })
 
+router.post("/flashcard-set/edit", async(req,res) => {
+    try{
+        const user = await User.findOne({username: req.body.username})
+        if(!user)
+            return res.status(401).json({message: "Invalid Username"})
+
+        const set = Flashcard.findById(req.body.cardID)
+        
+
+        res.status(201).json()
+    }  catch (error) {
+        res.status(500).json({message: "Internal Server Error"})
+    }
+})
+
 /*
     Expected return of json data
     {

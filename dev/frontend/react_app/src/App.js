@@ -18,6 +18,7 @@ import Error from './Components/Error/Error';
 import ViewStudySets from './Components/ViewStudySets/ViewStudySets';
 import Quiz from './Components/Quiz/Quiz'
 import QuizScores from './Components/QuizScores/QuizScores';
+import EditSet from './Components/EditSet/EditSet';
 
 function App() {
 	const data = localStorage.getItem('data');
@@ -47,6 +48,7 @@ function App() {
 						<Route path="/view-quiz/:id" exact element={<Quiz user={user}/>} />
 						<Route path="/scores/:id" exact element={<QuizScores user={user} />} />
 						{/* <Route path="/scores" exact element={<QuizScores />} />*/}
+						<Route path="/flashcard-view/:id/edit" exact element={<EditSet user={user}/>}/>
 						<Route path="*" element={<Error />} />
 					</Routes>
 				</div>
