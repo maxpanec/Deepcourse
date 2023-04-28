@@ -78,7 +78,8 @@ const ViewStudySets = (props) => {
       return;
     }
     else {
-      navigate(`/quiz/${quizSetID}?type=${quizType}`);
+      // navigate(`/quiz/${quizSetID}?type=${quizType}`);
+      navigate(`/view-quiz/${quizSetID}?type=${quizType}`);
     }
   }
 
