@@ -14,7 +14,6 @@ const QuizScores = (props) => {
                     params: { id: id }
                 },
             );
-                setScores(response.data.data);
             } catch (error) {
                 console.error(error);
             }
