@@ -20,6 +20,8 @@ const FlashcardView = (props) => {
 
   const nav = useNavigate();
 
+  //get flashcard set's data and store in state
+  //also generate table view mode
   useEffect(() => {
     const getRes = async () => {
         const res = await axios.get("http://localhost:3001/flashcards/flashcard-set", {params: {id: id}});
@@ -45,6 +47,7 @@ const FlashcardView = (props) => {
     getRes();
   }, [id]);
 
+  //update deck mode with next card
   const nextCard = () => {
     if(position >= QnAs.length - 1)
       return;
@@ -56,6 +59,7 @@ const FlashcardView = (props) => {
     setTermLabel("Question")
   }
 
+  //update deck mode with previous card
   const prevCard = () => {
     if(position <= 0)
       return;
@@ -67,6 +71,7 @@ const FlashcardView = (props) => {
       setTermLabel("Question")
   }
 
+  //flip to other side (question or answer) in deck mode
   const flip = () => {
     setIsFrontSide(!isFrontSide)
     if(termLabel === "Question")
@@ -75,14 +80,17 @@ const FlashcardView = (props) => {
       setTermLabel("Question")
   }
 
+  //navigate to edit flashcard page
   const handleEdit = () => {
     nav("edit");
   }
 
   return(
     <div className="outer">
+      {/* title of the set */}
       {titleData}
 
+      {/* buttons for choosing mode and editting */}
       {titleData !== "" && 
       <Stack direction="row" spacing={2} className="button-container">
         <Button variant="contained" color="primary" onClick={() => {setIsTableFormat(true)}}>Table</Button>
@@ -90,11 +98,13 @@ const FlashcardView = (props) => {
         <Button variant="contained" color="primary" onClick={() => handleEdit()}>Edit</Button>
       </Stack>}
 
+      {/* table mode content */}
       {isTableFormat &&
       <div className="flashcard-grid">
         {cardData}
       </div>}
 
+      {/* deck mode content */}
       {QnAs != null && !isTableFormat &&
       <div style={{textAlign: "center"}}>
         <h3 style={{marginTop: "4px", marginBottom: "4px"}}>{termLabel}</h3>
@@ -111,6 +121,7 @@ const FlashcardView = (props) => {
   );
 };
 
+//JSX Component for the card showing in deckmode
 const FlashCardTableCard = (props) => {
   return(
     <div className="complete-card">

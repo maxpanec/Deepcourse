@@ -1,7 +1,9 @@
 import React from 'react';
 
+//display Password Errors
 const AccountError = (props) => {
 
+    //if props.messages is an Array generate all <li>
     const listElements = (messages) => {
         const arr = []
         messages.forEach((message) => {
@@ -9,6 +11,7 @@ const AccountError = (props) => {
         })
         return arr
     }
+    
     return(
         <div className="error_msg">
             <ul>

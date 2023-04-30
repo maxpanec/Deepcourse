@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt")
 
 // BASE URL FOR TESTING API ENDPOINTS http://localhost:3001/accounts/
 
+//API for signing in
 /*
     Expected Format of req.body
     {
@@ -38,6 +39,7 @@ router.post("/signin", async(req,res) => {
     }
 })
 
+//API for verifying you your account before resetting password
 /*
     Expected Format of req.body
     {
@@ -62,6 +64,7 @@ router.post("/forget-password", async (req, res) => {
     }
 })
 
+//API for resetting password
 /*
     Expected Format of req.body
     {
@@ -106,6 +109,7 @@ router.post("/forget-password/reset", async (req, res) => {
     }
 })
 
+//API for verifying you your account before resetting username
 /*
     Expected Format of req.body
     {
@@ -125,6 +129,7 @@ router.post("/forget-username", async (req, res) => {
     }
 })
 
+//API for resetting username
 /*
     Expected Format of req.body
     {
@@ -158,6 +163,7 @@ router.post("/forget-username/reset", async(req, res) => {
     }
 })
 
+//API for signing up
 /*
     Expected Format of req.body
     {

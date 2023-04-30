@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var QnA = require('./QnA');
 var Score = require('./Score');
 
-
+//DB Schema for Flashcards
 const FlashcardSchema = new mongoose.Schema({
     setName: {type: String, required: true},
     createdBy: {
