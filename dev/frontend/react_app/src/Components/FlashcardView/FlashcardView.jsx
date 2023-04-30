@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button, Stack } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import axios from "axios"
 import "./FlashcardView.css";
 
@@ -12,6 +11,7 @@ const FlashcardView = (props) => {
   const [cardData, setCardData] = useState([]);
   const [titleData, setTitleData] = useState("");
   const [isFrontSide, setIsFrontSide] = useState(true);
+  const [termLabel, setTermLabel] = useState("Question");
   const [QnAs, setQnAs] = useState(null);
   const [position, setPosition] = useState(0);
   const [frontCardText, setFrontCardText] = useState("");
@@ -53,6 +53,7 @@ const FlashcardView = (props) => {
     setFrontCardText(isFrontSide ? q : a)
     setBackCardText(!isFrontSide ? q : a)
     setPosition(position+1);
+    setTermLabel("Question")
   }
 
   const prevCard = () => {
@@ -63,6 +64,15 @@ const FlashcardView = (props) => {
       setFrontCardText(isFrontSide ? q : a)
       setBackCardText(!isFrontSide ? q : a)
       setPosition(position-1);
+      setTermLabel("Question")
+  }
+
+  const flip = () => {
+    setIsFrontSide(!isFrontSide)
+    if(termLabel === "Question")
+      setTermLabel("Answer")
+    else
+      setTermLabel("Question")
   }
 
   const handleEdit = () => {
@@ -86,13 +96,16 @@ const FlashcardView = (props) => {
       </div>}
 
       {QnAs != null && !isTableFormat &&
-      <div className="deck-container ">
-        <ArrowBackIosNewIcon className="deck-arrow" onClick={prevCard}/>
-          <div className="deck" onClick={() => {setIsFrontSide(!isFrontSide)}}>
-            <div className={"frontCard" + (!isFrontSide ? " flipped" : "")}><h2>{frontCardText}</h2></div>
-            <div className={"backCard" + (isFrontSide ? " flipped" : "")}><h2>{backCardText}</h2></div>
-          </div>
-        <ArrowForwardIosIcon className="deck-arrow" onClick={nextCard}/>
+      <div style={{textAlign: "center"}}>
+        <h3 style={{marginTop: "4px", marginBottom: "4px"}}>{termLabel}</h3>
+        <div className="deck-container ">
+          <ArrowBackIosNewIcon className="deck-arrow" onClick={prevCard}/>
+            <div className="deck" onClick={flip}>
+              <div className={"frontCard" + (!isFrontSide ? " flipped" : "")}><h2>{frontCardText}</h2></div>
+              <div className={"backCard" + (isFrontSide ? " flipped" : "")}><h2>{backCardText}</h2></div>
+            </div>
+          <ArrowForwardIosIcon className="deck-arrow" onClick={nextCard}/>
+        </div>
       </div>}
     </div>
   );

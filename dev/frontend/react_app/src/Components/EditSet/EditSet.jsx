@@ -139,8 +139,8 @@ const EditSet = () => {
             e.preventDefault();
             try {
                 //push to database (use backend api)
-                const url = "http://localhost:3001/flashcards/flashcard-set/edit"
-                await axios.post(url, {
+                const url = "http://localhost:3001/flashcards/flashcard-set"
+                await axios.put(url, {
                     username: username,
                     setName: titleData,
                     cards: cardData,
