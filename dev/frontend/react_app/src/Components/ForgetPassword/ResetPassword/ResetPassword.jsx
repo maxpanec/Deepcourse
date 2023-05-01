@@ -5,6 +5,7 @@ import { Link, useNavigate, useLocation, Navigate } from "react-router-dom";
 import { Button, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./ResetPassword.css"
+import AccountError from "../../AccountError/AccountError";
 
 //reset password page
 const ResetPassword = () => {
@@ -93,7 +94,7 @@ const ResetPassword = () => {
                         />
                     </div>
                     </ThemeProvider>
-                    {error && <div className="error_msg">{error}</div>}
+                    {error && <AccountError message={error}/>}
                     <Button type='submit' variant="contained" color="primary" fullWidth>Reset Password</Button>
                 </form>
                 <div className="back" >

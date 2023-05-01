@@ -4,6 +4,7 @@ const Flashcard = require("../models/Flashcard")
 
 // BASE URL FOR TESTING API ENDPOINTS http://localhost:3001/quiz/
 
+//API for adding a score to a flashcard set
 /*
     Expected Format of req.body
     //the id of the flashcard to be deleted
@@ -31,6 +32,7 @@ router.put("/score", async(req,res) => {
     }
 })
 
+//API for getting a flashcard set's scores
 /*
     Expected return of json data
     {
@@ -73,6 +75,7 @@ router.get("/scores", async(req,res) => {
     }
 })
 
+//API for generating a quiz
 /*
     Expected return of json data
     {
@@ -128,6 +131,7 @@ router.get("/quiz", async(req,res) => {
     }
 })
 
+//helper function for generating short answer quiz
 function getShortAnswerData(set){
     const retArr = []
     set.cards.forEach((card) => {
@@ -140,6 +144,7 @@ function getShortAnswerData(set){
     return retArr
 }
 
+//helper function for generating true or flase quiz
 function getTrueOrFalseData(set){
     const retArr = []
 
@@ -167,7 +172,7 @@ function getTrueOrFalseData(set){
     }
     return retArr
 }
-
+//helper function for generating multiple choice quiz
 function getMultipleChoiceData(set){
     const retArr = []
 

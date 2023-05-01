@@ -3,8 +3,9 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import './Signup.css'
+import AccountError from '../AccountError/AccountError.jsx';
 
 //Registration page
 const Signup = () => {
@@ -124,7 +125,7 @@ const Signup = () => {
                         />
                     </div>
                 </ThemeProvider>
-                {error && <div className="error_msg">{error}</div>}
+                {error && <AccountError message={error}/>}
                 <Button type='submit' variant="contained" color="primary" fullWidth>Sign Up</Button>
             </form>
         </div>

@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt")
 
 // BASE URL FOR TESTING API ENDPOINTS http://localhost:3001/accounts/
 
+//API for signing in
 /*
     Expected Format of req.body
     {
@@ -38,6 +39,7 @@ router.post("/signin", async(req,res) => {
     }
 })
 
+//API for verifying you your account before resetting password
 /*
     Expected Format of req.body
     {
@@ -62,6 +64,7 @@ router.post("/forget-password", async (req, res) => {
     }
 })
 
+//API for resetting password
 /*
     Expected Format of req.body
     {
@@ -86,8 +89,13 @@ router.post("/forget-password/reset", async (req, res) => {
             return res.status(402).json({message: "Password does not match!"})
 
         const {error} = validatePassword({password: req.body.password})
-        if (error)
-            return res.status(400).json({message: error.details[0].message})
+        if (error){
+            const messages = []
+            error.details.forEach((detail) => {
+                messages.push(detail.message)
+            })
+            return res.status(400).json({message: messages})
+        }
             
         const salt = await bcrypt.genSalt(Number(10))
         const hashPassword = await bcrypt.hash(req.body.password, salt)
@@ -101,6 +109,7 @@ router.post("/forget-password/reset", async (req, res) => {
     }
 })
 
+//API for verifying you your account before resetting username
 /*
     Expected Format of req.body
     {
@@ -120,6 +129,7 @@ router.post("/forget-username", async (req, res) => {
     }
 })
 
+//API for resetting username
 /*
     Expected Format of req.body
     {
@@ -153,6 +163,7 @@ router.post("/forget-username/reset", async(req, res) => {
     }
 })
 
+//API for signing up
 /*
     Expected Format of req.body
     {
@@ -167,8 +178,13 @@ router.post("/forget-username/reset", async(req, res) => {
 router.post("/signup", async (req, res) => {
     try {
         const {error} = validate(req.body)
-        if (error)
-            return res.status(400).json({message: error.details[0].message})
+        if (error){
+            const messages = []
+            error.details.forEach((detail) => {
+                messages.push(detail.message)
+            })
+            return res.status(400).json({message: messages})
+        }
 
         const userEmail = await User.findOne({email: req.body.email})
         if (userEmail)

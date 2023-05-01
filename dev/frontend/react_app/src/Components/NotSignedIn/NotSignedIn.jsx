@@ -1,6 +1,7 @@
 import React from 'react'
 import './NotSignedIn.css'
 
+//JSX Element for display page saying user is not signed in
 const NotSignedIn = ()  => {
     return(
         <div className='mustsignin-container'>

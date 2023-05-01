@@ -4,6 +4,7 @@ const Flashcard = require("../models/Flashcard")
 
 // BASE URL FOR TESTING API ENDPOINTS http://localhost:3001/flashcards/
 
+//API for creating a flashcard set
 /*
     Expected Format of req.body
     {
@@ -48,21 +49,57 @@ router.post("/flashcard-set", async(req,res) => {
     }
 })
 
-router.post("/flashcard-set/edit", async(req,res) => {
+//API for editting a flashcard set
+/*
+    Expected Format of req.body
+    {
+        //username of the user creating the set
+        "username":String,
+        //name for the study set
+        "setName":String,
+        //id of the flashcard set
+        "cardID":String,
+        //array of objects with each object having keys question and answer representing 
+        //the question and answer for an individual flashcard
+        //this example only contains two question answer pairs but the number can be any number 1 or greater
+        "cards": [
+            {
+                "question":String,
+                "answer":String
+            },
+            {
+                "question":String,
+                "answer":String
+            }
+        ]
+    }
+*/
+router.put("/flashcard-set", async(req,res) => {
     try{
         const user = await User.findOne({username: req.body.username})
         if(!user)
             return res.status(401).json({message: "Invalid Username"})
 
-        const set = Flashcard.findById(req.body.cardID)
-        
+        const set = await Flashcard.findById(req.body.cardID)
+        if(!set)
+            return res.status(401).json({message: "Invalid ID"})
 
-        res.status(201).json()
+        try{
+            set.cards = req.body.cards
+            set.setName = req.body.setName
+            await set.save()
+        }
+        catch(err){
+            return res.status(400).json({message: "Invalid flashcard data"})
+        }
+        
+        res.status(200).json()
     }  catch (error) {
         res.status(500).json({message: "Internal Server Error"})
     }
 })
 
+//API for getting all a user's flashcard sets metadata (names and ids)
 /*
     Expected return of json data
     {
@@ -111,6 +148,7 @@ router.get("/flashcard-sets-info", async(req,res) => {
     }
 })
 
+//API for getting a flashcard set's data
 /*
     Expected return of json data
     {
@@ -178,6 +216,7 @@ router.get("/flashcard-set", async(req,res) => {
     }
 })
 
+//API for deleting a flashcard set
 /*
     Expected paramters
     //the username of the user who owns this set

@@ -3,12 +3,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 mongoose.set('strictQuery', false);
 
+//configure API routes
 const accountRoutes = require('./routes/accounts')
 const flashcardRoutes = require('./routes/flashcards')
 const quizRoutes = require('./routes/quiz')
 
 const app = express();
 
+//configure server
 app.use(express.json());
 app.use(cors());
 app.use("/accounts", accountRoutes)
@@ -16,7 +18,7 @@ app.use("/flashcards", flashcardRoutes)
 app.use("/quiz", quizRoutes)
 
 
-
+//connect to DB
 try{
 	mongoose.connect(
 		"mongodb+srv://deepcourse:njTtojFCOwrHmkmM@deepcourse.nyh03pf.mongodb.net/?retryWrites=true&w=majority",
@@ -29,7 +31,8 @@ try{
 }
 
 const PORT = 3001;
-  
+
+//start server
 app.listen(PORT, (error) =>{
     if(!error)
         console.log("Server is Successfully Running, and App is listening on port " + PORT)

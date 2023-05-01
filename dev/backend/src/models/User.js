@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const passwordComplexity = require("joi-password-complexity")
 
+//DB Schema for accounts
 const UserSchema = new mongoose.Schema({
 	username: {type: String, required: true, unique: true},
 	email: {type: String, required: true, unique: true},
