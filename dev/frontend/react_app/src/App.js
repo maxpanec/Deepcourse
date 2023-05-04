@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
+// imported paths
 import Homepage from './Components/Homepage/Homepage';
 import Navbar from './Components/Navbar/Navbar';
 import Signin from './Components/Signin/Signin';
@@ -21,6 +22,7 @@ import QuizScores from './Components/QuizScores/QuizScores';
 import EditSet from './Components/EditSet/EditSet';
 
 function App() {
+	// get user information from localStorage (for login usage)
 	const data = localStorage.getItem('data');
 	const user = useMemo(() => {
 		return JSON.parse(data);
@@ -30,7 +32,9 @@ function App() {
 		<BrowserRouter>
 			<div className='container'>
 				<div className='content'>
+					{/* Navigation bar that always sticks on top */}
 					<Navbar user={user} />
+					{/* all exists routes(pages) with specific link*/}
 					<Routes>
 						<Route path="/" exact element={<Homepage />} />
 						<Route path="/signin" exact element={<Signin />} />
@@ -52,6 +56,7 @@ function App() {
 						<Route path="*" element={<Error />} />
 					</Routes>
 				</div>
+				{/* footer that always stick on the buttom */}
 				<Footer />
 			</div>
 		</BrowserRouter>

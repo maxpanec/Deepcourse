@@ -79,6 +79,7 @@ const Signup = () => {
             <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em"}}>Create an Account</h1>
             <form onSubmit={handleSubmit}>
                 <ThemeProvider theme={darkTheme}>
+                    {/* email text field */}
                     <div className='signup_field_container'>
                         <TextField
                             name="email"
@@ -91,6 +92,7 @@ const Signup = () => {
                             autoFocus
                         />
                     </div>
+                    {/* username text field */}
                     <div className='signup_field_container'>
                         <TextField
                             name="username"
@@ -102,6 +104,7 @@ const Signup = () => {
                             onChange={handleSignupDataChange}
                         />
                     </div>
+                    {/* password text field */}
                     <div className='signup_field_container'>
                         <TextField
                             name="password"
@@ -113,6 +116,7 @@ const Signup = () => {
                             onChange={handleSignupDataChange}
                         />
                     </div>
+                    {/* confirm password text field */}
                     <div className='signup_field_container'>
                         <TextField
                             name="confirm password"
@@ -125,7 +129,9 @@ const Signup = () => {
                         />
                     </div>
                 </ThemeProvider>
+                {/* error message if any */}
                 {error && <AccountError message={error}/>}
+                {/* submit button */}
                 <Button type='submit' variant="contained" color="primary" fullWidth>Sign Up</Button>
             </form>
         </div>

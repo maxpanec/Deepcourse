@@ -37,6 +37,7 @@ const ForgetUsername = () => {
 			const url = "http://localhost:3001/accounts/forget-username";
 			await axios.post(url, data);
 			navigate(
+                //go to reset page and pass data
                 '/forget-username/reset',
                 {state: data}
             );
@@ -65,6 +66,7 @@ const ForgetUsername = () => {
                 <h1 className="header">Enter Email</h1>
                 <form onSubmit={handleSubmit}>
                     <ThemeProvider theme={darkTheme}>
+                        {/* email text field */}
                         <div className="forget-field-container">
                             <TextField
                                 name="email"
@@ -77,10 +79,13 @@ const ForgetUsername = () => {
                                 autoFocus
                             />
                         </div>
+                        {/* error message if any */}
                         {error && <div className="error_msg">{error}</div>}
+                        {/* submit button */}
                         <Button type='submit' variant="contained" color="primary" fullWidth>Submit</Button>
                     </ThemeProvider>
                 </form>
+                {/* back button (back to signin page) */}
                 <div className="back" >
                     <Button
                         variant="contained" 

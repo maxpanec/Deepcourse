@@ -1,3 +1,4 @@
+/* entire footer general style */
 .footer_div{
     background-color: #161b22;
     padding-top: 16px;
@@ -6,14 +7,17 @@
     width: 100%;
 }
 
+/* all links in footer styling */
 .links{
     text-align: center;
 }
 
+/* links hover */
 .link:hover{
     color: orange;
 }
 
+/* each link style */
 .link{
     display: inline-block;
     color: white;
@@ -21,15 +25,18 @@
     margin-bottom: 5px;
 }
 
+/* about button style */
 .about{
     margin-right: 20px;
 }
 
+/* staight line */
 .line{
     border: 1px solid gray;
     width: 95%;
 }
 
+/* footer content style */
 .footer-content{
     padding: 0;
     margin: 0;

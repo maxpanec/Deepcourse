@@ -71,6 +71,7 @@ const ResetPassword = () => {
                 <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em"}}>Reset Password</h1>
                 <form onSubmit={handleSubmit}>
                     <ThemeProvider theme={darkTheme}>
+                        {/* new password text field */}
                         <div className='reset_password_field_container'>
                             <TextField
                                 name="password"
@@ -82,6 +83,7 @@ const ResetPassword = () => {
                                 onChange={handleChange}
                             />
                         </div>
+                        {/* confirmed new password text field */}
                         <div className='reset_password_field_container'>
                         <TextField
                             name="confirmed_password"
@@ -94,9 +96,12 @@ const ResetPassword = () => {
                         />
                     </div>
                     </ThemeProvider>
+                    {/* error message if any */}
                     {error && <AccountError message={error}/>}
+                    {/* submit button */}
                     <Button type='submit' variant="contained" color="primary" fullWidth>Reset Password</Button>
                 </form>
+                {/* back button */}
                 <div className="back" >
                     <Button
                         variant="contained" 

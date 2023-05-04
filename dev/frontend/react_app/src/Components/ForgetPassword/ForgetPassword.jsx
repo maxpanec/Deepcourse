@@ -38,6 +38,7 @@ const ForgetPassword = () => {
 			const url = "http://localhost:3001/accounts/forget-password";
 			await axios.post(url, data);
 			navigate(
+                //go to reset page
                 '/forget-password/reset',
                 //pass data
                 {state: data}
@@ -66,6 +67,7 @@ const ForgetPassword = () => {
                 <h1 className="header">Enter Username and Email</h1>
                 <form onSubmit={handleSubmit}>
                     <ThemeProvider theme={darkTheme}>
+                        {/* Email Text Field */}
                         <div className="forget-field-container">
                             <TextField
                                 name="email"
@@ -78,7 +80,7 @@ const ForgetPassword = () => {
                                 autoFocus
                             />
                         </div>
-    
+                        {/* username text field */}
                         <div className="forget-field-container">
                             <TextField
                                 name="username"
@@ -91,10 +93,13 @@ const ForgetPassword = () => {
                                 autoFocus
                             />
                         </div>
+                        {/* Error message if any */}
                         {error && <div className="error_msg">{error}</div>}
+                        {/* Sumbit button */}
                         <Button type='submit' variant="contained" color="primary" fullWidth>Submit</Button>
                     </ThemeProvider>
                 </form>
+                {/* back button */}
                 <div className="back" >
                     <Button
                         variant="contained" 
