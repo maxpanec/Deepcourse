@@ -61,7 +61,7 @@ const EditSet = () => {
         return () => window.removeEventListener("beforeunload", unloadCallback);
     }, []);
 
-    //get carddata and title data from backend
+    //get cards data and title data from backend
     useEffect(() => {
         const getRes = async () => {
             const res = await axios.get("http://localhost:3001/flashcards/flashcard-set", {params: {id: id}});
@@ -132,7 +132,7 @@ const EditSet = () => {
         };
     
         /**
-         * Submit all user input to database
+         * Edit the flashcard and store the new data to database
          * @param {*} e event parameter
          */
         const handleSubmit = async (e) => {
