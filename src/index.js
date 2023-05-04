@@ -30,7 +30,7 @@ try{
 	console.log("Failed to Connect to Database!")
 }
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001
 
 //start server
 app.listen(PORT, (error) =>{
