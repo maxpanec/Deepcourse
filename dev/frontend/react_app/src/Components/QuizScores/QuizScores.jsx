@@ -63,7 +63,7 @@ const QuizScores = (props) => {
                         style={{ height: getBarHeight(quiz.score) }}
                         key={quiz.date}
                     >
-                        <div className="quiz-scores-score">{quiz.score}</div>
+                        <div className="quiz-scores-score">{(quiz.score).toFixed(2)}</div>
                         <div className="quiz-scores-date">{formatDate(quiz.date)}</div>
                     </div>
                 ))}
