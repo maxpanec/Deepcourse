@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./Quiz.css";
 import { useParams, useLocation } from "react-router-dom";
 import { useNavigate, Navigate } from "react-router-dom";
-import axios from "axios"
+import { Button } from '@mui/material';
+import Popup from "reactjs-popup";
+import axios from "axios";
 
 let choices = [];
 
@@ -10,12 +12,19 @@ const Quiz = () => {
     const { id } = useParams();
     const [quizData, setQuizData] = useState([]);
     const [buttonData, setButtonData] = useState([]);
+    const [continueButtonData, setContinueButtonData] = useState([]);
     const [userAnswers, setUserAnswers] = useState([]);
     const [error, setError] = useState("");
+    const [opened, setOpened] = useState(false);
+    const [quizFlag, setQuizFlag] = useState(true);
     const location = useLocation();
     const type = new URLSearchParams(location.search).get("type");
     const navigate = useNavigate();
     let res;
+
+    const handleClose = () => {
+        setOpened(false);
+    }
 
     useEffect(() => {
         for (let i = 0; i < userAnswers.length; i++) {
@@ -26,15 +35,7 @@ const Quiz = () => {
         console.log(choices);
     }, [userAnswers]);
 
-    const handleSubmit = async (e, userScore) => {
-        e.preventDefault();
-        console.log("score:" + userScore)
-        const numQuestions = quizData.length;
-        const numAnswers = userAnswers.filter((answer) => answer !== undefined).length;
-        if (choices.length < 4 || choices.includes(undefined) || choices.includes("")) {
-            setError("Please answer all questions before submitting.");
-            return;
-        }
+    const postScore = async (e, userScore) => {
         try {
             const url = "http://localhost:3001/quiz/score";
             await axios.put(url, {
@@ -57,9 +58,28 @@ const Quiz = () => {
         }
     }
 
+    const handleSubmit = (e, userScore) => {
+        e.preventDefault();
+        console.log("score:" + userScore)
+        const numQuestions = quizData.length;
+        const numAnswers = userAnswers.filter((answer) => answer !== undefined).length;
+        if (choices.length < 4 || choices.includes(undefined) || choices.includes("")) {
+            setError("You still have unanswered questions remaining. Would you like to submit anyway?");
+            setOpened(true);
+            return;
+        }
+        setError("Are you sure you would like to submit?")
+        setOpened(true);
+        return;
+    }
+
     useEffect(() => {
         const getRes = async () => {
             res = await axios.get("http://localhost:3001/quiz/quiz", { params: { id: id, type: type } });
+            if (res.data.data === undefined) {
+                setQuizFlag(false);
+                return;
+            }
             let quizCards;
             let key = 0;
             let grade = () => {
@@ -69,11 +89,15 @@ const Quiz = () => {
                         score += 1;
                     }
                 }
-                score = (score / choices.length) * 100;
+                score = (score / res.data.data.length) * 100;
                 return score;
             }
             let newButtonData = (
                 <button className="submit-button" onClick={(e) => handleSubmit(e, grade())}>Submit</button>
+            )
+
+            let continueButton = (
+                <Button variant='text' onClick={(e) => postScore(e, grade())}>Continue</Button>
             )
             if (type === "ToF") {
                 quizCards = res.data.data.map((card, index) =>
@@ -161,22 +185,49 @@ const Quiz = () => {
 
             setQuizData(quizCards);
             setButtonData(newButtonData);
+            setContinueButtonData(continueButton);
         }
         getRes();
     }, [id]);
 
-    return (
-        <div className="outer">
-            <div className="header-div">
-                <h1 className="header-title">Quiz</h1>
+    if (quizFlag) {
+        return (
+            <div className="outer">
+                <div className="header-div">
+                    <h1 className="header-title">Quiz</h1>
+                </div>
+                <div className="questions">
+                    {quizData}
+                </div>
+                {buttonData}
+
+                <div className="skipped-popup-container">
+                    <Popup
+                        open={opened}
+                        onClose={handleClose}
+                        modal nested>
+                        {() => (
+                            <div className="skipped-popup-content">
+                                <h4 className="skipped-popup-header">{error}</h4>
+                                <div className="popup-buttons">
+                                    <Button variant='text' onClick={(e) => handleClose(e)}>Back</Button>
+                                    {continueButtonData}
+                                </div>
+                            </div>
+                        )}
+                    </Popup>
+                </div>
             </div>
-            <div className="questions">
-                {quizData}
+        )
+    }
+    else {
+        return (
+            <div className="outer">
+                <h2>Failed to get quiz contents. Please be sure your Study Set has at least 4 elements.</h2>
+                <Button className='error-button' variant='text' onClick={() => navigate(`/view-studysets`)}>Back</Button>
             </div>
-            {buttonData}
-            <h3 className="error">{error}</h3>
-        </div>
-    )
+        )
+    }
 }
 
 export default Quiz;
