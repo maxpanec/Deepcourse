@@ -23,10 +23,14 @@ const Quiz = () => {
     let res;
 
     const handleClose = () => {
+        // Closes confirmation popup
         setOpened(false);
     }
 
+
     useEffect(() => {
+        // Updates the choices array to keep track of scores
+        // every time an input is recorded
         for (let i = 0; i < userAnswers.length; i++) {
             if (userAnswers[i] !== undefined) {
                 choices[i] = userAnswers[i];
@@ -36,6 +40,7 @@ const Quiz = () => {
     }, [userAnswers]);
 
     const postScore = async (e, userScore) => {
+        // Posts score to backend, called by popup confirm button
         try {
             const url = "http://localhost:3001/quiz/score";
             await axios.put(url, {
@@ -59,11 +64,12 @@ const Quiz = () => {
     }
 
     const handleSubmit = (e, userScore) => {
+        // Creates confirmation popup window
         e.preventDefault();
         console.log("score:" + userScore)
-        const numQuestions = quizData.length;
-        const numAnswers = userAnswers.filter((answer) => answer !== undefined).length;
-        if (choices.length < 4 || choices.includes(undefined) || choices.includes("")) {
+        const numQuestions = res.data.data.length;
+        // Check if there are unanswered questions
+        if (choices.length < numQuestions || choices.includes(undefined) || choices.includes("")) {
             setError("You still have unanswered questions remaining. Would you like to submit anyway?");
             setOpened(true);
             return;
@@ -73,19 +79,22 @@ const Quiz = () => {
         return;
     }
 
+
     useEffect(() => {
+        // Get quiz data from server and populate cards     
         const getRes = async () => {
+            // Retrieve quiz data
             res = await axios.get("http://localhost:3001/quiz/quiz", { params: { id: id, type: type } });
             if (res.data.data === undefined) {
                 setQuizFlag(false);
                 return;
             }
             let quizCards;
-            let key = 0;
             let grade = () => {
+                // Grades the quiz on a scale of [0, 100]
                 let score = 0;
                 for (let i = 0; i < choices.length; i++) {
-                    if (choices[i] !== undefined && choices[i].answer.toString().toLowerCase() === res.data.data[i].answer.toLowerCase()) {
+                    if (choices[i] !== undefined && choices[i].answer.toString().toLowerCase().trim() === res.data.data[i].answer.toLowerCase().trim()) {
                         score += 1;
                     }
                 }
@@ -99,6 +108,7 @@ const Quiz = () => {
             let continueButton = (
                 <Button variant='text' onClick={(e) => postScore(e, grade())}>Continue</Button>
             )
+            // Populate quiz cards for true or false quiz
             if (type === "ToF") {
                 quizCards = res.data.data.map((card, index) =>
                     <div className="question-card" key={index}>
@@ -129,6 +139,7 @@ const Quiz = () => {
                     </div>
                 );
             }
+            // Populate quiz cards for multiple choice quiz
             else if (type === "MC") {
                 quizCards = res.data.data.map((card, index) =>
                     <div className="question-card">
@@ -168,6 +179,7 @@ const Quiz = () => {
                     </div>
                 )
             }
+            // Populate quiz cards for short answer quiz
             else {
                 quizCards = res.data.data.map((card, index) =>
                     <div className="question-card">
@@ -191,6 +203,8 @@ const Quiz = () => {
     }, [id]);
 
     if (quizFlag) {
+        // Check for a valid quiz
+        // Quiz flag will be set if the study set has at least four questions
         return (
             <div className="outer">
                 <div className="header-div">
@@ -221,6 +235,7 @@ const Quiz = () => {
         )
     }
     else {
+        // If quiz flag is false, load the error page
         return (
             <div className="outer">
                 <h2>Failed to get quiz contents. Please be sure your Study Set has at least 4 elements.</h2>
