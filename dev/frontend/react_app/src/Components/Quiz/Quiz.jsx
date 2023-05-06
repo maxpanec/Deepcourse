@@ -36,7 +36,6 @@ const Quiz = () => {
                 choices[i] = userAnswers[i];
             }
         }
-        console.log(choices);
     }, [userAnswers]);
 
     const postScore = async (e, userScore) => {
@@ -66,7 +65,6 @@ const Quiz = () => {
     const handleSubmit = (e, userScore) => {
         // Creates confirmation popup window
         e.preventDefault();
-        console.log("score:" + userScore)
         const numQuestions = res.data.data.length;
         // Check if there are unanswered questions
         if (choices.length < numQuestions || choices.includes(undefined) || choices.includes("")) {
