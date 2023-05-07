@@ -1,7 +1,6 @@
 {
   "name": "react_app",
   "version": "0.1.0",
-  "homepage": "https://maxpanec.github.io/Deepcourse",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
