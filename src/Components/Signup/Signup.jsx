@@ -57,7 +57,6 @@ const Signup = () => {
             //login automatically if success
 			localStorage.setItem("data", JSON.stringify(res.data));
 			navigate("/");
-			window.location.reload()
 		} 
         //Error catching
         catch (error) {

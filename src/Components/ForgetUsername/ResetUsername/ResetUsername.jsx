@@ -41,7 +41,6 @@ const ResetUsername = (props) => {
             if(props.user != null)
                 localStorage.setItem("data", JSON.stringify(res.data));
 		    navigate('/');
-		    window.location.reload();
 		} 
         //error catching
         catch (error) {

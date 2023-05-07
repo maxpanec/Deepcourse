@@ -42,7 +42,6 @@ const ForgetPassword = () => {
                 //pass data
                 {state: data}
             );
-			window.location.reload();
 		} 
         //error catching
         catch (error) {

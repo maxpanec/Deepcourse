@@ -40,7 +40,6 @@ const ForgetUsername = () => {
                 '/forget-username/reset',
                 {state: data}
             );
-			window.location.reload();
 		} 
         //error checks
         catch (error) {

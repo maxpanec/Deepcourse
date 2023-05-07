@@ -45,7 +45,6 @@ const ResetPassword = () => {
             const url = "https://studysets.herokuapp.com/accounts/forget-password/reset";
 			await axios.post(url, data);
 		    navigate('/');
-		    window.location.reload();
 		} 
         //error catching
         catch (error) {

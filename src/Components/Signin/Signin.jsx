@@ -37,7 +37,6 @@ const Signin = () => {
             //store user information (login)
 			localStorage.setItem("data", JSON.stringify(res.data));
 			navigate("/");
-			window.location.reload()
 		} 
         //Error catching
         catch (error) {
