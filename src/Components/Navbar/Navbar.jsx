@@ -15,7 +15,6 @@ const Navbar = (props)  => {
         if(resp){
             localStorage.clear();
             navigate("/");
-            Navbar.location.reload();
         }
     }
 
