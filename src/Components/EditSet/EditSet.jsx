@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Navigate } from "react-router-dom";
 import { TextField } from '@mui/material';
+import "./EditSet.css"
 
 const EditSet = () => {
     const [cardData, setCardData] = useState([]);
