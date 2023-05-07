@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
 import './Error.css'
 
 //Error Page (All pages that does not exist)
 const Error = () => {
   const navigate = useNavigate();
-  navigate("/");
+  useEffect(()=>{
+    navigate("/");
+  })
 
   return (
     <div className="message">
