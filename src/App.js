@@ -33,6 +33,7 @@ function App() {
 					<Navbar user={user} />
 					<Routes>
 						<Route path="/" exact element={<Homepage />} />
+						<Route path="/Deepcourse" exact element={<Homepage />} />
 						<Route path="/signin" exact element={<Signin />} />
 						<Route path="/needtosignin" exact element={<NotSignedIn />} />
 						<Route path="/signup" exact element={<Signup />} />
