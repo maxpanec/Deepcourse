@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Deepcourse/static/css/main.d9bb6b6a.css",
+    "main.js": "/Deepcourse/static/js/main.3de51b94.js",
+    "static/js/787.b701888c.chunk.js": "/Deepcourse/static/js/787.b701888c.chunk.js",
+    "index.html": "/Deepcourse/index.html",
+    "main.d9bb6b6a.css.map": "/Deepcourse/static/css/main.d9bb6b6a.css.map",
+    "main.3de51b94.js.map": "/Deepcourse/static/js/main.3de51b94.js.map",
+    "787.b701888c.chunk.js.map": "/Deepcourse/static/js/787.b701888c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d9bb6b6a.css",
+    "static/js/main.3de51b94.js"
+  ]
+}
