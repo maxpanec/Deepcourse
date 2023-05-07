@@ -56,9 +56,11 @@ const Signin = () => {
     //HTML code
     return (
         <div className="signin_container">
+            {/* header */}
             <h1 className="header" >Login to Account</h1>
             <form onSubmit={handleSubmit}>
                 <ThemeProvider theme={darkTheme}>
+                    {/* username or email text field */}
                     <div className='signin_field_container'>
                         <TextField
                             name="username_email"
@@ -70,9 +72,11 @@ const Signin = () => {
                             onChange={handleChange}
                             autoFocus
                         />
+                        {/* button to forget username page */}
                         <Link to='/forget-username' className='forgets'>Forget Username?</Link>
                     </div>
                     
+                    {/* password text field */}
                     <div className='signin_field_container'>
                         <TextField
                             name="password"
@@ -83,12 +87,15 @@ const Signin = () => {
                             fullWidth
                             onChange={handleChange}
                         />
+                        {/* button to forget password page */}
                         <Link to='/forget-password' className='forgets'>Forget Password?</Link>
                     </div>
                 </ThemeProvider>
+                {/* error message if any */}
                 {error && <div className="error_msg">{error}</div>}
                 <Button type='submit' variant="contained" color="primary" fullWidth>Sign In</Button>
             </form>
+            {/* Sign up page guide and redirection */}
             <h3 className='question' style={{}}>Don't have an account?</h3>
             <div className='signup'>
                 <Button

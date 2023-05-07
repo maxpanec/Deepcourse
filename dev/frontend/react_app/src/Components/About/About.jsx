@@ -10,6 +10,7 @@ const About = () => {
                 <div>
                     <h1>Team DeepCourse</h1>
                 </div>
+                {/* Team Member Names */}
                 <div className="innerDiv">
                     <h2>Members</h2>
                     <ul className="names">

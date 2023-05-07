@@ -1,17 +1,21 @@
+/* background */
 .navbar{
     background-color: #161b22;
     padding-top: 16px;
     padding-bottom: 16px;
 }
 
+/* title text */
 .navbar_title h1{
     margin: 0;
 }
 
+/* title container */
 .navbar_title{
     margin-left: 32px;
 }
 
+/* links in nav bar */
 .navbar_links{
     margin: 0;
     position: absolute;
@@ -19,10 +23,12 @@
     right: 12px;
 }
 
+/* each bullet points */
 .navbar_links ul{
     margin: 0;
 }
 
+/* each item(link) in nav bar */
 .navbar_item{
     margin-left: 16px;
     display: inline-block;
@@ -31,6 +37,7 @@
     font-weight: 600;
 }
 
+/* hover for each item */
 .navbar_item:hover{
     color: orange;
 }

@@ -38,8 +38,10 @@ const ResetUsername = (props) => {
             //connects to backend api
             const url = "http://localhost:3001/accounts/forget-username/reset";
 			const { data: res } = await axios.post(url, data);
+            //auto sign in
             if(props.user != null)
                 localStorage.setItem("data", JSON.stringify(res.data));
+            //back to home page
 		    navigate('/');
 		    window.location.reload();
 		} 
@@ -67,6 +69,7 @@ const ResetUsername = (props) => {
         return (
             <div className="reset_username_container">
                 <h1 style={{color: "#1976d2", marginBottom: "1em", marginTop : "0em"}}>Reset Username</h1>
+                {/* new username text field */}
                 <form onSubmit={handleSubmit}>
                     <ThemeProvider theme={darkTheme}>
                         <div className='reset_username_field_container'>
@@ -82,9 +85,12 @@ const ResetUsername = (props) => {
                         />
                     </div>
                     </ThemeProvider>
+                    {/* error message if any */}
                     {error && <div className="error_msg">{error}</div>}
+                    {/* reset button */}
                     <Button type='submit' variant="contained" color="primary" fullWidth>Reset Username</Button>
                 </form>
+                {/* back button (back to sign in page) */}
                 <div className="back" >
                     <Button
                         variant="contained" 
