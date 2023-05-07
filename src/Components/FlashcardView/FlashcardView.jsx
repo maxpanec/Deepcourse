@@ -24,7 +24,7 @@ const FlashcardView = (props) => {
   //also generate table view mode
   useEffect(() => {
     const getRes = async () => {
-        const res = await axios.get("http://localhost:3001/flashcards/flashcard-set", {params: {id: id}});
+        const res = await axios.get("https://studysets.herokuapp.com/flashcards/flashcard-set", {params: {id: id}});
         let flashcards = res.data.data.cards;
         let title = (<div className="view-set-title">
             <h1 className="set-title">{res.data.data.name}</h1>

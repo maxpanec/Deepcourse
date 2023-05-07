@@ -52,7 +52,7 @@ const Signup = () => {
         
 		try {
             //connect to backend api
-			const url = "http://localhost:3001/accounts/signup";
+			const url = "https://studysets.herokuapp.com/accounts/signup";
 			const { data: res } = await axios.post(url, signupData);
             //login automatically if success
 			localStorage.setItem("data", JSON.stringify(res.data));

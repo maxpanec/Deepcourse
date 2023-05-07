@@ -36,7 +36,7 @@ const ResetUsername = (props) => {
 		e.preventDefault();
 		try {
             //connects to backend api
-            const url = "http://localhost:3001/accounts/forget-username/reset";
+            const url = "https://studysets.herokuapp.com/accounts/forget-username/reset";
 			const { data: res } = await axios.post(url, data);
             if(props.user != null)
                 localStorage.setItem("data", JSON.stringify(res.data));

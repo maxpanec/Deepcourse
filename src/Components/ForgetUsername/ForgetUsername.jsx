@@ -34,7 +34,7 @@ const ForgetUsername = () => {
 		e.preventDefault();
 		try {
             //connect to backend api and pass data if no error
-			const url = "http://localhost:3001/accounts/forget-username";
+			const url = "https://studysets.herokuapp.com/accounts/forget-username";
 			await axios.post(url, data);
 			navigate(
                 '/forget-username/reset',

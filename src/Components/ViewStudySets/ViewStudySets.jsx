@@ -22,7 +22,7 @@ const ViewStudySets = (props) => {
       return;
     const fetchStudySets = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/flashcards/flashcard-sets-info', {
+        const response = await axios.get('https://studysets.herokuapp.com/flashcards/flashcard-sets-info', {
           params: { username: props.user.username },
         });
         setStudySets(response.data.data);
@@ -54,7 +54,7 @@ const ViewStudySets = (props) => {
     const resp = window.confirm("Do you want to delete this set?");
     if(resp){
       try {
-        await axios.delete('http://localhost:3001/flashcards/flashcard-set', {
+        await axios.delete('https://studysets.herokuapp.com/flashcards/flashcard-set', {
           params: { username: props.user.username, id: setId },
         })
         setStudySets(studySets.filter(set => set.id !== setId))

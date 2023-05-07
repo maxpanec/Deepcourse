@@ -35,7 +35,7 @@ const ForgetPassword = () => {
 		e.preventDefault();
 		try {
             //connect to backend api
-			const url = "http://localhost:3001/accounts/forget-password";
+			const url = "https://studysets.herokuapp.com/accounts/forget-password";
 			await axios.post(url, data);
 			navigate(
                 '/forget-password/reset',

@@ -64,7 +64,7 @@ const EditSet = () => {
     //get carddata and title data from backend
     useEffect(() => {
         const getRes = async () => {
-            const res = await axios.get("http://localhost:3001/flashcards/flashcard-set", {params: {id: id}});
+            const res = await axios.get("https://studysets.herokuapp.com/flashcards/flashcard-set", {params: {id: id}});
             setTitleData(res.data.data.name);
             setCardData(res.data.data.cards);
         }
@@ -139,7 +139,7 @@ const EditSet = () => {
             e.preventDefault();
             try {
                 //push to database (use backend api)
-                const url = "http://localhost:3001/flashcards/flashcard-set"
+                const url = "https://studysets.herokuapp.com/flashcards/flashcard-set"
                 await axios.put(url, {
                     username: username,
                     setName: titleData,

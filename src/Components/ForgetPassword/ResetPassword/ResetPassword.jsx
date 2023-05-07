@@ -42,7 +42,7 @@ const ResetPassword = () => {
     const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-            const url = "http://localhost:3001/accounts/forget-password/reset";
+            const url = "https://studysets.herokuapp.com/accounts/forget-password/reset";
 			await axios.post(url, data);
 		    navigate('/');
 		    window.location.reload();

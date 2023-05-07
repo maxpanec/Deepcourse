@@ -32,7 +32,7 @@ const Signin = () => {
 		e.preventDefault();
 		try {
             //connect to backend api
-			const url = "http://localhost:3001/accounts/signin";
+			const url = "https://studysets.herokuapp.com/accounts/signin";
 			const { data: res } = await axios.post(url, data);
             //store user information (login)
 			localStorage.setItem("data", JSON.stringify(res.data));

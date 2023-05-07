@@ -130,7 +130,7 @@ const CreateSet = () => {
             e.preventDefault();
             try {
                 //push to database (use backend api)
-                const url = "http://localhost:3001/flashcards/flashcard-set"
+                const url = "https://studysets.herokuapp.com/flashcards/flashcard-set"
                 await axios.post(url, {
                     username: username,
                     setName: title,

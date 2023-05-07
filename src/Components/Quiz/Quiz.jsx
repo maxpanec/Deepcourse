@@ -41,7 +41,7 @@ const Quiz = () => {
     const postScore = async (e, userScore) => {
         // Posts score to backend, called by popup confirm button
         try {
-            const url = "http://localhost:3001/quiz/score";
+            const url = "https://studysets.herokuapp.com/quiz/score";
             await axios.put(url, {
                 id: id,
                 score: userScore
@@ -82,7 +82,7 @@ const Quiz = () => {
         // Get quiz data from server and populate cards     
         const getRes = async () => {
             // Retrieve quiz data
-            res = await axios.get("http://localhost:3001/quiz/quiz", { params: { id: id, type: type } });
+            res = await axios.get("https://studysets.herokuapp.com/quiz/quiz", { params: { id: id, type: type } });
             if (res.data.data === undefined) {
                 setQuizFlag(false);
                 return;

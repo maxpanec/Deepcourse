@@ -16,7 +16,7 @@ const QuizScores = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/quiz/scores', {
+                const response = await axios.get('https://studysets.herokuapp.com/quiz/scores', {
                     params: { id: id },
                 });
                 const sortedScores = response.data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
