@@ -56,7 +56,8 @@ const Signup = () => {
 			const { data: res } = await axios.post(url, signupData);
             //login automatically if success
 			localStorage.setItem("data", JSON.stringify(res.data));
-			navigate("/");
+			navigate("/Deepcourse");
+            window.location.reload()
 		} 
         //Error catching
         catch (error) {

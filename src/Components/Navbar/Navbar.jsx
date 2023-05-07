@@ -14,7 +14,8 @@ const Navbar = (props)  => {
         //yes: remove user information, and redirect
         if(resp){
             localStorage.clear();
-            navigate("/");
+            navigate("/Deepcourse");
+            window.location.reload()
         }
     }
 

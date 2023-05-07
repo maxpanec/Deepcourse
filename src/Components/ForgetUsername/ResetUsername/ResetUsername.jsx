@@ -40,7 +40,8 @@ const ResetUsername = (props) => {
 			const { data: res } = await axios.post(url, data);
             if(props.user != null)
                 localStorage.setItem("data", JSON.stringify(res.data));
-		    navigate('/');
+		    navigate('/Deepcourse');
+            window.location.reload()
 		} 
         //error catching
         catch (error) {

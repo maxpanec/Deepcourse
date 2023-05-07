@@ -36,7 +36,8 @@ const Signin = () => {
 			const { data: res } = await axios.post(url, data);
             //store user information (login)
 			localStorage.setItem("data", JSON.stringify(res.data));
-			navigate("/");
+			navigate("/Deepcourse");
+            window.location.reload()
 		} 
         //Error catching
         catch (error) {
