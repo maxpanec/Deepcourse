@@ -24,6 +24,16 @@ cd dev
 cd frontend/react_app  
 npm start  
 
+## Hosted Version
+
+### Issues with Hosted Version
+Due to the way GitHub Pages does routing, refreshing the page will cause you to go to GitHub Pages error page  
+If you accidentally hit refresh just renavigate to the URL below  
+This issue could not be overcome as it is an underlying issue with GitHub Pages and multi routed applications  
+
+### URL
+https://maxpanec.github.io/Deepcourse/  
+
 ## How to check status of product
 build the product using the steps above  
 navigate to http://localhost:3000  
