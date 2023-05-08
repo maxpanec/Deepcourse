@@ -30,6 +30,7 @@ npm start
 Due to the way GitHub Pages does routing, refreshing the page will cause you to go to GitHub Pages error page  
 If you accidentally hit refresh just renavigate to the URL below  
 This issue could not be overcome as it is an underlying issue with GitHub Pages and multi routed applications  
+Because of this issue testing should be done locally  
 
 ### URL
 https://maxpanec.github.io/Deepcourse/  
